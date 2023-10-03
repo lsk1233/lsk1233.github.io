@@ -18,7 +18,7 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: lee_maind # the main title
+title: Remaind # the main title
 
 tagline: 상기의 개발일기 # it will display as the sub-title
 
@@ -37,7 +37,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: 이상기
+  name: 상기
   email: bumpal2@naver.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
