@@ -7,7 +7,7 @@
 <meta name="description" content="Sanggi Lee (이상기) — 3D vision and robotics: active view planning, online 3D reconstruction, visual perception. AiRLab, Dongguk University.">
 <link rel="icon" href="https://github.com/lsk1233.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6f7f9; --surface:#ffffff; --tint:#eef2f8; --ink:#0c1a2e; --text:#2b3645; --muted:#6b7686; --line:#e1e5ec;
@@ -200,6 +200,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .filter button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 @media (max-width:900px){.about{grid-template-columns:1fr}.photo{max-width:200px}}
 @media (max-width:620px){.info{grid-template-columns:1fr}.info li{grid-template-columns:110px 1fr}.info li:nth-child(odd){padding-right:0}}
+
+/* language toggle + Korean typography */
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;background:var(--surface);padding:2px;cursor:pointer;font:600 11.5px "JetBrains Mono",monospace;letter-spacing:.06em}
+.lang span{padding:4px 9px;border-radius:999px;color:var(--muted);transition:.15s}
+html:not([lang="ko"]) .lang [data-l="en"],html[lang="ko"] .lang [data-l="ko"]{background:var(--ink);color:var(--bg)}
+html[lang="ko"] body{font-family:Inter,"Noto Sans KR",system-ui,sans-serif;word-break:keep-all}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,html[lang="ko"] .tl h4,html[lang="ko"] .feat strong,html[lang="ko"] .more strong{font-family:"Space Grotesk","Noto Sans KR",sans-serif}
+html[lang="ko"] .serif,html[lang="ko"] .contact h2{font-family:"Noto Serif KR",Georgia,serif;font-style:normal;font-weight:500;letter-spacing:-.02em}
+html[lang="ko"] .contact h2 em{font-style:normal}
+html[lang="ko"] .hero h1{font-size:clamp(34px,4.2vw,50px);line-height:1.12}
+html[lang="ko"] .hero h1 .serif{font-size:1em}
+html[lang="ko"] .mono{letter-spacing:.04em}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
@@ -228,12 +240,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <nav><div class="wrap">
   <a class="logo" href="#top">sl<b>.</b> <small>Sanggi Lee</small></a>
   <div class="menu">
-    <a href="#about" class="on">About</a>
-    <a href="#research">Research</a>
-    <a href="#publications">Publications</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a class="btn solid" href="#contact">Get in touch ↗</a>
+    <a href="#about" class="on" data-ko="소개">About</a>
+    <a href="#research" data-ko="연구">Research</a>
+    <a href="#publications" data-ko="논문">Publications</a>
+    <a href="#projects" data-ko="프로젝트">Projects</a>
+    <a href="#experience" data-ko="경력">Experience</a>
+    <button class="lang" id="langBtn" aria-label="Switch language"><span data-l="en">EN</span><span data-l="ko">KO</span></button>
+    <a class="btn solid" href="#contact" data-ko="연락하기 ↗">Get in touch ↗</a>
   </div>
 </div></nav>
 
@@ -242,31 +255,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <div class="wrap hero">
   <div>
     <div class="eyebrow mono">Sanggi Lee / 이상기 · AiRLab</div>
-    <h1>3D Vision &amp; Robotics<br><span class="serif">Researcher</span></h1>
+    <h1 data-ko="3D 비전 · 로보틱스&lt;br&gt;&lt;span class=&quot;serif&quot;&gt;연구자&lt;/span&gt;">3D Vision &amp; Robotics<br><span class="serif">Researcher</span></h1>
     <div class="kw">Active View Planning · 3D Reconstruction · Gaussian Splatting SLAM · Visual Perception</div>
-    <p class="bio">I build systems that help robots <b>see, map, and decide where to look</b> — from online 3D Gaussian Splatting driven by stereo depth, to coverage-aware view planning that reconstructs a scene completely in a single pass.</p>
+    <p class="bio" data-ko="로봇이 &lt;b&gt;보고, 지도를 만들고, 어디를 볼지 스스로 판단&lt;/b&gt;하도록 돕는 시스템을 연구합니다. 스테레오 깊이 기반의 온라인 3D Gaussian Splatting부터, 한 번의 비행으로 장면 전체를 빠짐없이 복원하는 커버리지 기반 시점 계획까지 다룹니다.">I build systems that help robots <b>see, map, and decide where to look</b> — from online 3D Gaussian Splatting driven by stereo depth, to coverage-aware view planning that reconstructs a scene completely in a single pass.</p>
 
     <div class="chips">
-      <div class="chip"><span class="mono">Affiliation</span><strong>Dongguk University</strong></div>
-      <div class="chip"><span class="mono">Advisor</span><strong>Prof. Soohwan Song</strong></div>
-      <div class="chip"><span class="mono">Lab</span><strong>AiRLab</strong></div>
+      <div class="chip"><span class="mono" data-ko="소속">Affiliation</span><strong data-ko="동국대학교">Dongguk University</strong></div>
+      <div class="chip"><span class="mono" data-ko="지도교수">Advisor</span><strong>Prof. Soohwan Song</strong></div>
+      <div class="chip"><span class="mono" data-ko="연구실">Lab</span><strong>AiRLab</strong></div>
     </div>
 
     <div class="feat">
       <a href="https://lsk1233.github.io/explore-then-exploit/">
-        <span><span class="mono">IROS 2026 · First Author</span><strong>Online Explore-Then-Exploit UAV Scanning</strong></span><span class="arr">↗</span>
+        <span><span class="mono" data-ko="IROS 2026 · 제1저자">IROS 2026 · First Author</span><strong>Online Explore-Then-Exploit UAV Scanning</strong></span><span class="arr">↗</span>
       </a>
       <a href="https://www.mdpi.com/2079-9292/14/22/4436">
-        <span><span class="mono">Electronics 2025 · Co-author</span><strong>Stereo-GS: Online 3D Gaussian Splatting Mapping</strong></span><span class="arr">↗</span>
+        <span><span class="mono" data-ko="Electronics 2025 · 공동저자">Electronics 2025 · Co-author</span><strong>Stereo-GS: Online 3D Gaussian Splatting Mapping</strong></span><span class="arr">↗</span>
       </a>
     </div>
 
     <div class="cta">
-      <a class="btn solid" href="#research">Explore research ↘</a>
+      <a class="btn solid" href="#research" data-ko="연구 살펴보기 ↘">Explore research ↘</a>
       <a class="btn" href="#">CV (PDF) ↗</a>
     </div>
     <div class="minilinks">
-      <a class="u" href="mailto:bumpal2@naver.com">Email ↗</a>
+      <a class="u" href="mailto:bumpal2@naver.com" data-ko="이메일 ↗">Email ↗</a>
       <a class="u" href="#">Google Scholar ↗</a>
       <a class="u" href="https://github.com/lsk1233">GitHub ↗</a>
       <a class="u" href="#">LinkedIn ↗</a>
@@ -290,21 +303,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 01 ABOUT ============ -->
 <section id="about"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">01 / About</div><h2>A bit <span class="serif">about me.</span></h2></div>
+    <div><div class="mono" data-ko="01 / 소개">01 / About</div><h2 data-ko="저를 &lt;span class=&quot;serif&quot;&gt;소개합니다.&lt;/span&gt;">A bit <span class="serif">about me.</span></h2></div>
   </div>
   <div class="about reveal">
     <div class="photo"><img src="https://github.com/lsk1233.png?size=560" alt="Sanggi Lee"></div>
     <div>
-      <p class="about-lead">I am a researcher at <b>AiRLab, Dongguk University</b>, advised by Prof. Soohwan Song. My work spans <b>online 3D reconstruction</b> (3D Gaussian Splatting, SLAM, stereo depth), <b>active view and path planning</b> for complete scene capture, and learning-based <b>visual perception</b>. I enjoy turning research ideas into systems that run in real time.</p>
+      <p class="about-lead" data-ko="동국대학교 &lt;b&gt;AiRLab&lt;/b&gt;에서 연구하고 있습니다 (지도교수: Prof. Soohwan Song). &lt;b&gt;온라인 3D 복원&lt;/b&gt;(3D Gaussian Splatting, SLAM, 스테레오 깊이 추정), 장면을 빠짐없이 담기 위한 &lt;b&gt;능동 시점·경로 계획&lt;/b&gt;, 그리고 딥러닝 기반 &lt;b&gt;시각 인지&lt;/b&gt;를 연구합니다. 연구 아이디어를 실시간으로 동작하는 시스템으로 구현하는 일을 좋아합니다.">I am a researcher at <b>AiRLab, Dongguk University</b>, advised by Prof. Soohwan Song. My work spans <b>online 3D reconstruction</b> (3D Gaussian Splatting, SLAM, stereo depth), <b>active view and path planning</b> for complete scene capture, and learning-based <b>visual perception</b>. I enjoy turning research ideas into systems that run in real time.</p>
       <ul class="info">
-        <li><span>Institution</span>Dongguk University</li>
-        <li><span>Lab</span>AiRLab</li>
-        <li><span>Advisor</span>Prof. Soohwan Song</li>
-        <li><span>Location</span>Seoul, Korea</li>
-        <li><span>Email</span><a class="u" href="mailto:bumpal2@naver.com">bumpal2@naver.com</a></li>
+        <li data-ko="&lt;span&gt;소속&lt;/span&gt;동국대학교"><span>Institution</span>Dongguk University</li>
+        <li data-ko="&lt;span&gt;연구실&lt;/span&gt;AiRLab"><span>Lab</span>AiRLab</li>
+        <li data-ko="&lt;span&gt;지도교수&lt;/span&gt;Prof. Soohwan Song"><span>Advisor</span>Prof. Soohwan Song</li>
+        <li data-ko="&lt;span&gt;위치&lt;/span&gt;서울"><span>Location</span>Seoul, Korea</li>
+        <li><span data-ko="이메일">Email</span><a class="u" href="mailto:bumpal2@naver.com">bumpal2@naver.com</a></li>
         <li><span>GitHub</span><a class="u" href="https://github.com/lsk1233">lsk1233</a></li>
-        <li><span>Google Scholar</span><a class="u" href="#">Profile ↗</a></li>
-        <li><span>CV</span><a class="u" href="#">Download PDF ↗</a></li>
+        <li><span>Google Scholar</span><a class="u" href="#" data-ko="프로필 ↗">Profile ↗</a></li>
+        <li><span>CV</span><a class="u" href="#" data-ko="PDF 다운로드 ↗">Download PDF ↗</a></li>
       </ul>
     </div>
   </div>
@@ -313,32 +326,32 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 02 RESEARCH FOCUS ============ -->
 <section id="research"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">02 / Research Focus</div><h2>Perceive. Reconstruct. <span class="serif">Decide where to look.</span></h2></div>
-    <p>Connecting what a robot sees, how it builds a 3D model, and where it should look next.</p>
+    <div><div class="mono" data-ko="02 / 연구 분야">02 / Research Focus</div><h2 data-ko="인식하고, 복원하고, &lt;span class=&quot;serif&quot;&gt;어디를 볼지 정합니다.&lt;/span&gt;">Perceive. Reconstruct. <span class="serif">Decide where to look.</span></h2></div>
+    <p data-ko="로봇이 무엇을 보고, 어떻게 3D 모델을 만들고, 다음에 어디를 봐야 할지를 하나로 잇습니다.">Connecting what a robot sees, how it builds a 3D model, and where it should look next.</p>
   </div>
   <div class="focus">
     <div class="fcard reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5" stroke-dasharray="2.5 2.5"/><path d="m3 17.5 9 5 9-5" opacity=".5"/></svg>
-      <h3>Online 3D reconstruction</h3>
-      <p>Building photorealistic, metrically accurate 3D maps in real time from streaming stereo images with 3D Gaussian Splatting.</p>
+      <h3 data-ko="온라인 3D 복원">Online 3D reconstruction</h3>
+      <p data-ko="스테레오 영상 스트림으로부터 3D Gaussian Splatting을 이용해 사실적이고 스케일이 정확한 3D 지도를 실시간으로 구축합니다.">Building photorealistic, metrically accurate 3D maps in real time from streaming stereo images with 3D Gaussian Splatting.</p>
       <div class="tags"><span class="tag">3DGS</span><span class="tag">SLAM</span><span class="tag">Stereo Depth</span><span class="tag">MVS</span></div>
     </div>
     <div class="fcard reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 0-8h-2a4 4 0 0 1 0-8h6" stroke-dasharray="2.5 2.5"/></svg>
-      <h3>Active view &amp; path planning</h3>
-      <p>Deciding which viewpoints matter under a limited budget — coverage evaluation and routing for complete reconstruction.</p>
+      <h3 data-ko="능동 시점 · 경로 계획">Active view &amp; path planning</h3>
+      <p data-ko="제한된 예산 안에서 어떤 시점이 중요한지 판단합니다. 커버리지를 평가하고, 빠짐없는 복원을 위한 경로를 계획합니다.">Deciding which viewpoints matter under a limited budget — coverage evaluation and routing for complete reconstruction.</p>
       <div class="tags"><span class="tag">Next-Best-View</span><span class="tag">ALNS</span><span class="tag">UAV</span></div>
     </div>
     <div class="fcard reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 13l2.5-2.5L13 13l3-3 2 2" /><circle cx="8" cy="9" r="1"/></svg>
-      <h3>Visual perception</h3>
-      <p>Deep learning for understanding images — segmentation of small objects and detecting AI-generated imagery.</p>
+      <h3 data-ko="시각 인지">Visual perception</h3>
+      <p data-ko="이미지를 이해하는 딥러닝 — 작은 객체 분할과 AI 생성 이미지 탐지를 다룹니다.">Deep learning for understanding images — segmentation of small objects and detecting AI-generated imagery.</p>
       <div class="tags"><span class="tag">Segmentation</span><span class="tag">Detection</span><span class="tag">PyTorch</span></div>
     </div>
   </div>
 
   <div class="pipe reveal">
-    <div class="pipe-top"><span class="mono">The research pipeline</span><span>Pixels → 3D model → next view</span></div>
+    <div class="pipe-top"><span class="mono" data-ko="연구 파이프라인">The research pipeline</span><span data-ko="이미지 → 3D 모델 → 다음 시점">Pixels → 3D model → next view</span></div>
     <div class="steps">
       <div class="step"><span class="mono">01 / Sense</span><strong>Stereo / multi-view images</strong></div>
       <div class="step"><span class="mono">02 / Localize</span><strong>SLAM · camera pose</strong></div>
@@ -352,39 +365,39 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 02 PUBLICATIONS ============ -->
 <section id="publications"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">03 / Publications</div><h2>From ideas to <span class="serif">published research.</span></h2></div>
+    <div><div class="mono" data-ko="03 / 논문">03 / Publications</div><h2 data-ko="아이디어에서 &lt;span class=&quot;serif&quot;&gt;논문까지.&lt;/span&gt;">From ideas to <span class="serif">published research.</span></h2></div>
     <p><a class="u" href="#">Google Scholar ↗</a></p>
   </div>
-  <div class="filter reveal" id="filter"><button class="on" data-f="all">All</button><button data-f="conf">Conference</button><button data-f="journal">Journal</button></div>
+  <div class="filter reveal" id="filter"><button class="on" data-f="all" data-ko="전체">All</button><button data-f="conf" data-ko="학회">Conference</button><button data-f="journal" data-ko="저널">Journal</button></div>
   <div class="pgroup" data-k="conf">
-  <div class="pubs-label" style="margin-top:22px">Conference</div>
+  <div class="pubs-label" style="margin-top:22px" data-ko="학회 논문">Conference</div>
   <article class="pub reveal">
     <a class="th" href="https://lsk1233.github.io/explore-then-exploit/"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit teaser: initial coverage path and return re-scanning path" loading="lazy"></a>
     <div>
-      <div class="venue"><span class="mono">IROS 2026</span><span class="badge">Accepted</span></div>
+      <div class="venue"><span class="mono">IROS 2026</span><span class="badge" data-ko="게재 확정">Accepted</span></div>
       <h3><a href="https://lsk1233.github.io/explore-then-exploit/">Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning</a></h3>
       <div class="authors"><b>Sanggi Lee</b>, Inseong Choi, Soohwan Song<sup>†</sup></div>
-      <p>Completes initial scanning and targeted re-scanning within a single flight. Captured images are processed during outbound flight to detect under-scanned regions, and the return path is optimized with sector-level budgeted routing and ALNS refinement — improving reconstruction completeness under identical travel budgets.</p>
+      <p data-ko="초기 스캔과 부족한 영역의 재스캔을 한 번의 비행 안에서 끝냅니다. 나가는 비행 중에 촬영 이미지를 처리해 덜 찍힌 영역을 찾고, 섹터 단위 예산 경로 계획과 ALNS 최적화로 복귀 경로를 만들어 같은 이동 예산에서 복원 완성도를 높였습니다.">Completes initial scanning and targeted re-scanning within a single flight. Captured images are processed during outbound flight to detect under-scanned regions, and the return path is optimized with sector-level budgeted routing and ALNS refinement — improving reconstruction completeness under identical travel budgets.</p>
       <div class="plinks">
-        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/">Project page ↗</a>
-        <a class="u" href="#">Paper ↗</a>
-        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4">Video ↗</a>
-        <a class="u" href="#">Code ↗</a>
+        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/" data-ko="프로젝트 페이지 ↗">Project page ↗</a>
+        <a class="u" href="#" data-ko="논문 ↗">Paper ↗</a>
+        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4" data-ko="영상 ↗">Video ↗</a>
+        <a class="u" href="#" data-ko="코드 ↗">Code ↗</a>
       </div>
     </div>
   </article>
   </div>
   <div class="pgroup" data-k="journal">
-  <div class="pubs-label" style="margin-top:34px">Journal</div>
+  <div class="pubs-label" style="margin-top:34px" data-ko="저널 논문">Journal</div>
   <article class="pub reveal">
     <a class="th" href="https://www.mdpi.com/2079-9292/14/22/4436"><img src="assets/stereo-gs.jpg" alt="Stereo-GS: stereo input, estimated depth, and rendered 3DGS results compared with baselines" loading="lazy"></a>
     <div>
-      <div class="venue"><span class="mono">MDPI Electronics · 2025</span><span class="badge">Published</span></div>
+      <div class="venue"><span class="mono">MDPI Electronics · 2025</span><span class="badge" data-ko="게재">Published</span></div>
       <h3><a href="https://www.mdpi.com/2079-9292/14/22/4436">Stereo-GS: Online 3D Gaussian Splatting Mapping Using Stereo Depth Estimation</a></h3>
-      <div class="authors">Junkyu Park*, Byeonggwon Lee*, <b>Sanggi Lee</b>, Soohwan Song<sup>†</sup> <span style="font-size:12px">(*equal contribution)</span></div>
-      <p>A real-time online 3DGS system that reconstructs photorealistic scenes from streaming stereo pairs. Combines stereo DROID-SLAM tracking with FoundationStereo depth, a two-stage depth filtering pipeline, and PSNR-guided Gaussian initialization — state-of-the-art results on EuRoC and TartanAir.</p>
+      <div class="authors">Junkyu Park*, Byeonggwon Lee*, <b>Sanggi Lee</b>, Soohwan Song<sup>†</sup> <span style="font-size:12px" data-ko="(*공동 제1저자)">(*equal contribution)</span></div>
+      <p data-ko="스트리밍 스테레오 영상으로 사실적인 장면을 실시간 복원하는 온라인 3DGS 시스템입니다. 스테레오 DROID-SLAM 추적, FoundationStereo 깊이 추정, 2단계 깊이 필터링, PSNR 기반 Gaussian 초기화를 결합해 EuRoC와 TartanAir에서 최고 수준의 성능을 달성했습니다.">A real-time online 3DGS system that reconstructs photorealistic scenes from streaming stereo pairs. Combines stereo DROID-SLAM tracking with FoundationStereo depth, a two-stage depth filtering pipeline, and PSNR-guided Gaussian initialization — state-of-the-art results on EuRoC and TartanAir.</p>
       <div class="plinks">
-        <a class="u" href="https://www.mdpi.com/2079-9292/14/22/4436">Paper ↗</a>
+        <a class="u" href="https://www.mdpi.com/2079-9292/14/22/4436" data-ko="논문 ↗">Paper ↗</a>
       </div>
     </div>
   </article>
@@ -394,17 +407,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 03 PROJECTS ============ -->
 <section id="projects"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">04 / Selected Projects</div><h2>Research, <span class="serif">in practice.</span></h2></div>
-    <p><a class="u" href="https://github.com/lsk1233?tab=repositories">All repositories ↗</a></p>
+    <div><div class="mono" data-ko="04 / 주요 프로젝트">04 / Selected Projects</div><h2 data-ko="연구를 &lt;span class=&quot;serif&quot;&gt;직접 구현하다.&lt;/span&gt;">Research, <span class="serif">in practice.</span></h2></div>
+    <p><a class="u" href="https://github.com/lsk1233?tab=repositories" data-ko="전체 저장소 ↗">All repositories ↗</a></p>
   </div>
   <div class="proj">
     <a class="pcard reveal" href="https://lsk1233.github.io/explore-then-exploit/">
       <div class="img"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/paper_fig4.png" alt="Reconstruction results" loading="lazy"></div>
       <div class="meta mono">Research · AiRLab · 2025 – 2026</div>
-      <h3>Complete 3D scans in one flight.</h3>
+      <h3 data-ko="한 번의 비행으로 완전한 3D 스캔.">Complete 3D scans in one flight.</h3>
       <div class="stack">Path Planning / ALNS / Photogrammetry</div>
-      <p>Maximizing 3D reconstruction completeness under a fixed flight budget, validated in urban-scale simulation.</p>
-      <span class="u" style="font-size:13px;color:var(--ink)">Explore the project ↗</span>
+      <p data-ko="정해진 비행 예산 안에서 3D 복원 완성도를 최대화하고, 도시 규모 시뮬레이션으로 검증했습니다.">Maximizing 3D reconstruction completeness under a fixed flight budget, validated in urban-scale simulation.</p>
+      <span class="u" style="font-size:13px;color:var(--ink)" data-ko="프로젝트 보기 ↗">Explore the project ↗</span>
     </a>
     <a class="pcard reveal" href="https://github.com/lsk1233/drone-segmentation">
       <div class="img pair">
@@ -412,41 +425,41 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_mask/c_mask00005450.png" alt="Predicted drone mask" loading="lazy"><figcaption>MASK</figcaption></figure>
       </div>
       <div class="meta mono">Project · Visual Perception</div>
-      <h3>Segmenting small objects in video.</h3>
+      <h3 data-ko="영상 속 작은 객체 분할.">Segmenting small objects in video.</h3>
       <div class="stack">PyTorch / Semantic Segmentation / Video</div>
-      <p>Pixel-level segmentation of small UAVs in sky footage, trained on cropped aerial frames and run on full drone videos.</p>
-      <span class="u" style="font-size:13px;color:var(--ink)">View on GitHub ↗</span>
+      <p data-ko="하늘 영상 속 작은 드론을 픽셀 단위로 분할합니다. 잘라낸 항공 프레임으로 학습하고 전체 드론 영상에 적용했습니다.">Pixel-level segmentation of small UAVs in sky footage, trained on cropped aerial frames and run on full drone videos.</p>
+      <span class="u" style="font-size:13px;color:var(--ink)" data-ko="GitHub에서 보기 ↗">View on GitHub ↗</span>
     </a>
   </div>
 
   <div class="more">
-    <a class="reveal" href="https://github.com/lsk1233/AI-image-detection"><span class="mono">Deep Learning</span><span><strong>AI-Generated Image Detection</strong><span class="d">Real vs. generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</span></span><span>↗</span></a>
-    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · Planning</span><span><strong>UAV Trajectory Generation</strong><span class="d">Tooling for generating scanning trajectories for UAV missions.</span></span><span>↗</span></a>
-    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · 3D</span><span><strong>3D Modeling Project</strong><span class="d">Geometry processing for 3D reconstruction and scene representation.</span></span><span>↗</span></a>
+    <a class="reveal" href="https://github.com/lsk1233/AI-image-detection"><span class="mono">Deep Learning</span><span><strong data-ko="AI 생성 이미지 탐지">AI-Generated Image Detection</strong><span class="d" data-ko="ResNet / VGG로 실제 이미지와 생성 이미지를 구분합니다. 주파수 스펙트럼 변환과 화질 저하 분석을 활용했습니다.">Real vs. generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</span></span><span>↗</span></a>
+    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · Planning</span><span><strong data-ko="UAV 궤적 생성">UAV Trajectory Generation</strong><span class="d" data-ko="UAV 미션용 스캔 궤적을 생성하는 도구입니다.">Tooling for generating scanning trajectories for UAV missions.</span></span><span>↗</span></a>
+    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · 3D</span><span><strong data-ko="3D 모델링 프로젝트">3D Modeling Project</strong><span class="d" data-ko="3D 복원과 장면 표현을 위한 기하 처리 작업입니다.">Geometry processing for 3D reconstruction and scene representation.</span></span><span>↗</span></a>
   </div>
 </div></section>
 
 <!-- ============ 05 EXPERIENCE (timeline) ============ -->
 <section id="experience"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">05 / Experience &amp; Education</div><h2>Along <span class="serif">the way.</span></h2></div>
+    <div><div class="mono" data-ko="05 / 경력 · 학력">05 / Experience &amp; Education</div><h2 data-ko="걸어온 &lt;span class=&quot;serif&quot;&gt;길.&lt;/span&gt;">Along <span class="serif">the way.</span></h2></div>
   </div>
   <div class="cols">
     <div class="reveal">
-      <h3 class="col-h">Research Experience</h3>
+      <h3 class="col-h" data-ko="연구 경력">Research Experience</h3>
       <ul class="tl">
-        <li class="now"><h4>AiRLab, Dongguk University <span class="cur">Current</span></h4><time>20xx – Present</time><div class="org">Researcher · Advisor: Prof. Soohwan Song</div>
-          <p>Online explore-then-exploit UAV scanning with budgeted return re-scanning — first author, IROS 2026.</p>
-          <p>Online 3D Gaussian Splatting mapping with stereo depth estimation (Stereo-GS) — Electronics 2025.</p></li>
-        <li><h4>Honors &amp; Activities</h4><time>20xx</time><div class="org">Add an award or activity</div></li>
+        <li class="now"><h4 data-ko="동국대학교 AiRLab &lt;span class=&quot;cur&quot;&gt;진행 중&lt;/span&gt;">AiRLab, Dongguk University <span class="cur">Current</span></h4><time data-ko="20xx – 현재">20xx – Present</time><div class="org" data-ko="연구원 · 지도교수 Prof. Soohwan Song">Researcher · Advisor: Prof. Soohwan Song</div>
+          <p data-ko="예산 제약 복귀 재스캔을 활용한 온라인 Explore-Then-Exploit UAV 스캐닝 — 제1저자, IROS 2026">Online explore-then-exploit UAV scanning with budgeted return re-scanning — first author, IROS 2026.</p>
+          <p data-ko="스테레오 깊이 추정 기반 온라인 3D Gaussian Splatting 매핑 (Stereo-GS) — Electronics 2025">Online 3D Gaussian Splatting mapping with stereo depth estimation (Stereo-GS) — Electronics 2025.</p></li>
+        <li><h4 data-ko="수상 및 활동">Honors &amp; Activities</h4><time>20xx</time><div class="org" data-ko="수상·활동 내역 추가 예정">Add an award or activity</div></li>
       </ul>
     </div>
     <div class="reveal">
-      <h3 class="col-h">Education</h3>
+      <h3 class="col-h" data-ko="학력">Education</h3>
       <ul class="tl">
-        <li><h4>Dongguk University</h4><time>20xx – Present</time><div class="org">Degree / Major — edit me</div><p>Advisor: Prof. Soohwan Song</p></li>
+        <li><h4 data-ko="동국대학교">Dongguk University</h4><time data-ko="20xx – 현재">20xx – Present</time><div class="org" data-ko="학위 / 전공 — 수정 필요">Degree / Major — edit me</div><p data-ko="지도교수: Prof. Soohwan Song">Advisor: Prof. Soohwan Song</p></li>
       </ul>
-      <h3 class="col-h" style="margin-top:8px">Skills</h3>
+      <h3 class="col-h" style="margin-top:8px" data-ko="기술 스택">Skills</h3>
       <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>3D Gaussian Splatting</span><span>SLAM</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
     </div>
   </div>
@@ -455,9 +468,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ CONTACT ============ -->
 <section id="contact"><div class="wrap contact">
   <div class="reveal">
-    <div class="mono" style="color:var(--accent);margin-bottom:14px">Let's connect</div>
-    <h2>See the world.<br><em>Rebuild it in 3D.</em></h2>
-    <p>Open to research discussions and collaborations on 3D vision, reconstruction, and robotics.</p>
+    <div class="mono" style="color:var(--accent);margin-bottom:14px" data-ko="연락하기">Let's connect</div>
+    <h2 data-ko="세상을 보고,&lt;br&gt;&lt;em&gt;3D로 다시 짓습니다.&lt;/em&gt;">See the world.<br><em>Rebuild it in 3D.</em></h2>
+    <p data-ko="3D 비전, 복원, 로보틱스 분야의 연구 논의와 협업은 언제든 환영합니다.">Open to research discussions and collaborations on 3D vision, reconstruction, and robotics.</p>
   </div>
   <div class="reveal" style="padding-top:34px">
     <a class="mail" href="mailto:bumpal2@naver.com">bumpal2@naver.com <span>↗</span></a>
@@ -466,7 +479,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span>Perceive · Reconstruct · Plan</span><a class="u" href="#top">Back to top ↑</a></div></footer>
+<footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span data-ko="인식 · 복원 · 계획">Perceive · Reconstruct · Plan</span><a class="u" href="#top" data-ko="맨 위로 ↑">Back to top ↑</a></div></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -623,6 +636,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   document.querySelectorAll('#filter button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#filter button').forEach(x=>x.classList.toggle('on',x===b));
     groups.forEach(g=>g.style.display=(b.dataset.f==='all'||g.dataset.k===b.dataset.f)?'':'none');});
+  // language toggle (EN / KO)
+  const T_EN=document.title, T_KO='이상기 — 3D 비전 · 로보틱스 연구자';
+  const tr=[...document.querySelectorAll('[data-ko]')];
+  function setLang(l){ document.documentElement.lang=l; document.title=l==='ko'?T_KO:T_EN;
+    tr.forEach(el=>{ if(el.dataset.en===undefined)el.dataset.en=el.innerHTML; el.innerHTML=l==='ko'?el.dataset.ko:el.dataset.en; });
+    try{localStorage.setItem('lang',l)}catch(e){} }
+  let init='en'; const q=new URLSearchParams(location.search).get('lang');
+  if(q==='ko'||q==='en')init=q; else { try{init=localStorage.getItem('lang')||'en'}catch(e){} }
+  if(init==='ko')setLang('ko');
+  document.getElementById('langBtn').onclick=()=>setLang(document.documentElement.lang==='ko'?'en':'ko');
   // reveal on scroll
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
