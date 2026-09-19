@@ -72,7 +72,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .mission-top .live{color:var(--accent);display:flex;align-items:center;gap:6px}
 .mission-top .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
 @keyframes pulse{50%{opacity:.25}}
-#map{width:100%;height:auto;display:block}
+.scene{width:100%;border-radius:10px;overflow:hidden;cursor:grab;position:relative}.scene:active{cursor:grabbing}.scene canvas{display:block}.drag-hint{position:absolute}
 .bld{fill:var(--tint);stroke:var(--line);stroke-width:1}
 .bld.gap{fill:var(--warm-soft);stroke:var(--warm);stroke-dasharray:3 3}
 .bld.fixed{fill:var(--accent-soft);stroke:var(--accent);stroke-dasharray:none}
@@ -259,17 +259,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
   <!-- Mission visual: outbound scan -> detect gaps -> budgeted return re-scan -->
   <div class="mission" aria-label="Animated illustration of an explore-then-exploit UAV mission">
-    <div class="mission-top mono"><span>Mission View · 01</span><span class="live" id="phase">Outbound scan</span></div>
-    <svg id="map" viewBox="0 0 440 340">
-      <g id="gridg"></g>
-      <g id="blds"></g>
-      <path id="pOut" class="p-out" d=""/>
-      <path id="pRet" class="p-ret" d=""/>
-      <g id="vps"></g>
-      <rect class="home" x="24" y="300" width="14" height="14" rx="3"/>
-      <text x="44" y="311" font-size="10" font-family="JetBrains Mono" fill="currentColor" style="color:var(--muted)">HOME</text>
-      <g id="uav"><circle r="9" fill="var(--accent)" opacity=".15"/><path class="uav" d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="var(--ink)" stroke-width="2"/><circle r="2.4" class="uav"/></g>
-    </svg>
+    <div class="mission-top mono"><span>Mission View · 3D · drag to rotate</span><span class="live" id="phase">Outbound scan</span></div>
+    <div id="scene" class="scene" aria-label="Interactive 3D illustration of an explore-then-exploit UAV mission. Drag to rotate."></div>
     <div class="mission-foot">
       <div class="legend"><span><i></i>Outbound</span><span><i class="r"></i>Return re-scan</span><span><i class="g"></i>Coverage gap</span></div>
       <div style="display:flex;gap:12px;align-items:center">
@@ -421,54 +412,156 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span>Scan once. Reconstruct completely.</span><a class="u" href="#top">Back to top ↑</a></div></footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (()=>{
-  const NS="http://www.w3.org/2000/svg", $=id=>document.getElementById(id);
-  const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
-  // grid
-  for(let x=20;x<=420;x+=40)mk('line',{x1:x,y1:10,x2:x,y2:330,class:'grid-l'},$('gridg'));
-  for(let y=10;y<=330;y+=40)mk('line',{x1:20,y1:y,x2:420,y2:y,class:'grid-l'},$('gridg'));
-  // city blocks [x,y,w,h,gap]
-  const B=[[70,40,50,40,0],[150,30,60,55,1],[240,45,45,40,0],[320,35,60,50,0],
-           [70,120,40,60,0],[140,125,70,45,0],[245,115,50,70,1],[330,125,45,45,0],
-           [80,215,55,45,1],[165,210,50,55,0],[250,220,60,40,0],[335,205,45,60,1]];
-  const bl=B.map(b=>mk('rect',{x:b[0],y:b[1],width:b[2],height:b[3],rx:3,class:'bld'},$('blds')));
-  // outbound lawnmower
-  const out=[[31,300],[40,20],[400,20],[400,100],[40,100],[40,195],[400,195],[400,290]];
-  // return: visit gap buildings on the way home
-  const ret=[[400,290],[358,235],[270,150],[180,57],[108,238],[31,300]];
-  const d=p=>'M'+p.map(q=>q.join(' ')).join(' L');
-  const pO=$('pOut'), pR=$('pRet'); pO.setAttribute('d',d(out)); pR.setAttribute('d',d(ret));
-  ret.slice(1,-1).forEach(p=>mk('circle',{cx:p[0],cy:p[1],r:4,class:'vp r'},$('vps')));
-  const LO=pO.getTotalLength(), LR=pR.getTotalLength(), uav=$('uav');
-  const gaps=B.map((b,i)=>b[4]?i:-1).filter(i=>i>=0);
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let t0=null, raf;
-  function frame(ts){
-    if(!t0)t0=ts; const t=(ts-t0)/1000, T1=6, T2=1.2, T3=4.5;
-    let cov, phase;
-    pR.style.strokeDasharray=LR; 
-    if(t<T1){const k=t/T1, p=pO.getPointAtLength(LO*k);
-      uav.setAttribute('transform',`translate(${p.x} ${p.y})`); pR.style.strokeDashoffset=LR;
-      pO.style.opacity=1; cov=Math.round(k*78); phase='Outbound scan';
-      gaps.forEach(i=>bl[i].setAttribute('class','bld'));
-    } else if(t<T1+T2){ cov=78; phase='Detecting gaps';
-      gaps.forEach(i=>bl[i].setAttribute('class','bld gap'));
-    } else if(t<T1+T2+T3){const k=(t-T1-T2)/T3, p=pR.getPointAtLength(LR*k);
-      uav.setAttribute('transform',`translate(${p.x} ${p.y})`); pR.style.strokeDashoffset=LR*(1-k);
-      const done=Math.floor(k*gaps.length+0.35);
-      gaps.forEach((i,j)=>bl[i].setAttribute('class',j<done?'bld fixed':'bld gap'));
-      cov=Math.round(78+k*19); phase='Return re-scan';
-    } else { cov=97; phase='Mission complete'; gaps.forEach(i=>bl[i].setAttribute('class','bld fixed'));
-      $('cov').textContent=cov+'%'; $('phase').textContent=phase; return; }
-    $('cov').textContent=cov+'%'; $('phase').textContent=phase; raf=requestAnimationFrame(frame);
-  }
-  function start(){cancelAnimationFrame(raf);t0=null;
-    if(reduce){pR.style.strokeDasharray='none';gaps.forEach(i=>bl[i].setAttribute('class','bld fixed'));
-      const p=out[0];uav.setAttribute('transform',`translate(${p[0]} ${p[1]})`);$('cov').textContent='97%';$('phase').textContent='Mission complete';return;}
-    raf=requestAnimationFrame(frame);}
-  $('replay').onclick=start; start();
+  const $=id=>document.getElementById(id), host=$('scene');
+  if(!window.THREE||!host){host&&(host.innerHTML='<p class="mono" style="padding:40px;text-align:center">3D view unavailable</p>');return;}
+  let renderer;
+  try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});}catch(e){host.innerHTML='<p class="mono" style="padding:40px;text-align:center">WebGL not supported</p>';return;}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  host.appendChild(renderer.domElement);
 
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const C={}; const readColors=()=>{['--ink','--muted','--line','--tint','--surface','--accent','--accent-soft','--warm','--warm-soft','--bg'].forEach(k=>C[k]=new THREE.Color(css(k)));};
+  readColors();
+
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(34,1,0.1,200);
+  cam.position.set(28,22,31);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x8899aa,0.95));
+  const sun=new THREE.DirectionalLight(0xffffff,0.55); sun.position.set(10,20,6); scene.add(sun);
+
+  // ground + grid
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(30,24),new THREE.MeshBasicMaterial({color:C['--surface'],transparent:true,opacity:.6}));
+  ground.rotation.x=-Math.PI/2; scene.add(ground);
+  let grid=new THREE.GridHelper(30,15,C['--line'],C['--line']); grid.scale.z=24/30; scene.add(grid);
+
+  // city: [x,z,w,d,h,gap]
+  const B=[[-8,-6,3,2.6,3.2,0],[-3,-6.5,3.4,3,5.4,1],[2,-6,2.6,2.4,2.4,0],[7.5,-6.2,3.4,3,4.2,0],
+           [-8.5,-0.5,2.4,3.6,4.6,0],[-3,0,4,2.8,2.6,0],[2.5,0,2.8,3.8,6.2,1],[7.5,0,2.6,2.6,3.4,0],
+           [-8,5.8,3.2,2.8,2.8,1],[-2.5,5.8,2.8,3.2,4.0,0],[2.5,6,3.4,2.4,2.2,0],[7.5,5.8,2.8,3.4,5.0,1]];
+  const blds=B.map(([x,z,w,d,h,g])=>{
+    const geo=new THREE.BoxGeometry(w,h,d); geo.translate(0,h/2,0);
+    const m=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color:C['--tint'].clone()}));
+    const e=new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:C['--muted'].clone(),transparent:true,opacity:.55}));
+    const grp=new THREE.Group(); grp.add(m,e); grp.position.set(x,0,z); scene.add(grp);
+    return {x,z,w,d,h,gap:!!g,m,e,state:0};
+  });
+  const gaps=blds.filter(b=>b.gap);
+
+  // outbound lawnmower at altitude
+  const ALT=8.5, xs=[-12,12], rows=[-8,-2.8,2.4,7.6];
+  const home=new THREE.Vector3(-13,0.2,10);
+  const oPts=[home.clone(),new THREE.Vector3(-12,ALT,10)];
+  rows.forEach((z,i)=>{const a=i%2?xs[1]:xs[0], b=i%2?xs[0]:xs[1]; oPts.push(new THREE.Vector3(a,ALT,z),new THREE.Vector3(b,ALT,z));});
+  oPts.splice(1,1,new THREE.Vector3(-12,ALT,-8)); // climb then go to first row
+  const sampleLine=(pts,step=.12)=>{const out=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],n=Math.max(1,Math.ceil(a.distanceTo(b)/step));for(let k=0;k<n;k++)out.push(a.clone().lerp(b,k/n));}out.push(pts[pts.length-1].clone());return out;};
+  const oS=sampleLine(oPts);
+  // return route: arcs around each gap building (nearest-neighbour order from end)
+  const rPts=[oS[oS.length-1].clone()]; let cur=rPts[0].clone(); const left=[...gaps], order=[];
+  while(left.length){left.sort((a,b)=>cur.distanceTo(new THREE.Vector3(a.x,0,a.z))-cur.distanceTo(new THREE.Vector3(b.x,0,b.z)));const g=left.shift();order.push(g);
+    const r=Math.max(g.w,g.d)*0.9+1.3, y=g.h+1.2, a0=Math.atan2(cur.z-g.z,cur.x-g.x);
+    for(let k=0;k<=6;k++){const a=a0+k*(Math.PI*1.25/6);rPts.push(new THREE.Vector3(g.x+r*Math.cos(a),y,g.z+r*Math.sin(a)));}
+    cur=rPts[rPts.length-1];}
+  rPts.push(new THREE.Vector3(-13,3,10),home.clone());
+  const rCurve=new THREE.CatmullRomCurve3(rPts,false,'centripetal',.4); const rS=rCurve.getSpacedPoints(700);
+  // which return sample is closest to each gap building (for "fixed" timing)
+  order.forEach(g=>{let best=1e9,bi=0;rS.forEach((p,i)=>{const d=Math.hypot(p.x-g.x,p.z-g.z)+(i<(g._after||0)?1e3:0);if(d<best){best=d;bi=i}});g.fixAt=bi/rS.length+0.04;});
+
+  const mkLine=(pts,mat)=>{const g=new THREE.BufferGeometry().setFromPoints(pts);const l=new THREE.Line(g,mat);l.computeLineDistances&&l.computeLineDistances();g.setDrawRange(0,0);scene.add(l);return l;};
+  const outMat=new THREE.LineDashedMaterial({color:C['--accent'],dashSize:.35,gapSize:.25});
+  const retMat=new THREE.LineBasicMaterial({color:C['--warm']});
+  const outL=mkLine(oS,outMat), retL=mkLine(rS,retMat);
+  // shadow of route on ground
+  const shMat=new THREE.LineBasicMaterial({color:C['--accent'],transparent:true,opacity:.18});
+  const outSh=mkLine(oS.map(p=>new THREE.Vector3(p.x,0.02,p.z)),shMat);
+
+  // home pad
+  const pad=new THREE.Mesh(new THREE.CylinderGeometry(.7,.7,.08,24),new THREE.MeshBasicMaterial({color:C['--ink']})); pad.position.copy(home).setY(.04); scene.add(pad);
+
+  // UAV
+  const uav=new THREE.Group(); const ink=new THREE.MeshBasicMaterial({color:C['--ink']});
+  const arm=new THREE.BoxGeometry(1.5,.07,.1); const a1=new THREE.Mesh(arm,ink),a2=new THREE.Mesh(arm,ink); a1.rotation.y=Math.PI/4;a2.rotation.y=-Math.PI/4; uav.add(a1,a2);
+  uav.add(new THREE.Mesh(new THREE.BoxGeometry(.4,.18,.4),ink));
+  const rotMat=new THREE.MeshBasicMaterial({color:C['--accent'],transparent:true,opacity:.45,side:THREE.DoubleSide});
+  const rotors=[];[[.53,.53],[-.53,.53],[.53,-.53],[-.53,-.53]].forEach(([x,z])=>{const r=new THREE.Mesh(new THREE.CircleGeometry(.3,20),rotMat);r.rotation.x=-Math.PI/2;r.position.set(x,.06,z);uav.add(r);rotors.push(r);});
+  scene.add(uav);
+  // camera frustum (capture cone)
+  const fr=new THREE.LineSegments(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:C['--accent'],transparent:true,opacity:.5})); scene.add(fr);
+  const frFill=new THREE.Mesh(new THREE.BufferGeometry(),new THREE.MeshBasicMaterial({color:C['--accent'],transparent:true,opacity:.07,side:THREE.DoubleSide,depthWrite:false})); scene.add(frFill);
+  function setFrustum(p,target,size,color){
+    const dir=target.clone().sub(p).normalize(), up=Math.abs(dir.y)>.9?new THREE.Vector3(1,0,0):new THREE.Vector3(0,1,0);
+    const r=new THREE.Vector3().crossVectors(dir,up).normalize().multiplyScalar(size), u=new THREE.Vector3().crossVectors(r,dir).normalize().multiplyScalar(size*.75);
+    const c=[target.clone().add(r).add(u),target.clone().sub(r).add(u),target.clone().sub(r).sub(u),target.clone().add(r).sub(u)];
+    const v=[];c.forEach((q,i)=>{v.push(p,q,q,c[(i+1)%4]);});
+    fr.geometry.setFromPoints(v); fr.material.color.copy(color);
+    const f=[];c.forEach((q,i)=>f.push(p,q,c[(i+1)%4])); frFill.geometry.setFromPoints(f); frFill.material.color.copy(color);
+  }
+  // viewpoint markers on return
+  const vpMat=new THREE.MeshBasicMaterial({color:C['--warm']}); const vps=[];
+  for(let i=1;i<rPts.length-2;i+=2){const s=new THREE.Mesh(new THREE.OctahedronGeometry(.13),vpMat);s.position.copy(rPts[i]);s.visible=false;scene.add(s);vps.push({s,t:i/(rPts.length-1)});}
+
+  // controls
+  let ctl=null;
+  if(THREE.OrbitControls){ctl=new THREE.OrbitControls(cam,renderer.domElement);ctl.target.set(0,2.2,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.enableDamping=true;ctl.dampingFactor=.08;ctl.autoRotate=true;ctl.autoRotateSpeed=.55;ctl.minPolarAngle=.35;ctl.maxPolarAngle=1.35;
+    if(matchMedia('(pointer:coarse)').matches){ctl.enableRotate=false;renderer.domElement.style.touchAction='pan-y';}
+    ctl.update();} else cam.lookAt(0,2.2,0);
+
+  function resize(){const w=host.clientWidth,h=Math.round(w*0.78);renderer.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  addEventListener('resize',resize); resize();
+
+  const T1=8, T2=1.6, T3=7, HOLD=3.5, TOTAL=T1+T2+T3+HOLD;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let t0=performance.now(), visible=true, lastPhase='';
+  const setPhase=(p,c)=>{if(p!==lastPhase){$('phase').textContent=p;lastPhase=p;}$('cov').textContent=c+'%';};
+  const colorB=(b,s,pulse=0)=>{ // 0 unscanned, 1 scanned, 2 gap, 3 fixed
+    if(s===0){b.m.material.color.copy(C['--tint']);b.e.material.color.copy(C['--muted']);b.e.material.opacity=.45;}
+    if(s===1){b.m.material.color.copy(C['--surface']).lerp(C['--accent-soft'],.55);b.e.material.color.copy(C['--accent']);b.e.material.opacity=.35;}
+    if(s===2){b.m.material.color.copy(C['--warm-soft']).lerp(C['--warm'],.15+.2*pulse);b.e.material.color.copy(C['--warm']);b.e.material.opacity=.9;}
+    if(s===3){b.m.material.color.copy(C['--accent-soft']).lerp(C['--accent'],.25);b.e.material.color.copy(C['--accent']);b.e.material.opacity=.9;}
+  };
+  function update(t){
+    const now=t;
+    rotors.forEach((r,i)=>r.rotation.z=now*30+i);
+    if(t<T1){ const k=t/T1, i=Math.floor(k*(oS.length-1)), p=oS[i];
+      uav.position.copy(p); outL.geometry.setDrawRange(0,i+1); outSh.geometry.setDrawRange(0,i+1); retL.geometry.setDrawRange(0,0);
+      vps.forEach(v=>v.s.visible=false);
+      blds.forEach(b=>{const near=Math.hypot(p.x-b.x,p.z-b.z)<3.2&&p.y>ALT-.1; if(near&&b.state===0)b.state=1; colorB(b,b.state);});
+      setFrustum(p,new THREE.Vector3(p.x,0,p.z),2.2,C['--accent']); fr.visible=frFill.visible=p.y>ALT-.1;
+      setPhase('Outbound scan',Math.round(k*78));
+    } else if(t<T1+T2){ const pulse=.5+.5*Math.sin(t*9);
+      outL.geometry.setDrawRange(0,oS.length); outSh.geometry.setDrawRange(0,oS.length); uav.position.copy(oS[oS.length-1]);
+      blds.forEach(b=>{if(b.gap)b.state=2; else b.state=1; colorB(b,b.state,pulse);}); fr.visible=frFill.visible=false;
+      setPhase('Detecting gaps',78);
+    } else if(t<T1+T2+T3){ const k=(t-T1-T2)/T3, i=Math.min(rS.length-1,Math.floor(k*(rS.length-1))), p=rS[i]; const pulse=.5+.5*Math.sin(t*9);
+      uav.position.copy(p); retL.geometry.setDrawRange(0,i+1);
+      vps.forEach(v=>v.s.visible=k>=v.t);
+      let tgt=null; order.forEach(g=>{ if(k>=g.fixAt)g.state=3; else if(!tgt&&Math.hypot(p.x-g.x,p.z-g.z)<Math.max(g.w,g.d)+2.2)tgt=g; colorB(g,g.state,pulse);});
+      if(tgt){setFrustum(p,new THREE.Vector3(tgt.x,tgt.h*.55,tgt.z),1.4,C['--warm']);fr.visible=frFill.visible=true;} else fr.visible=frFill.visible=false;
+      setPhase('Return re-scan',Math.round(78+19*Math.min(1,order.filter(g=>g.state===3).length/order.length)));
+    } else { uav.position.copy(home).setY(.25); retL.geometry.setDrawRange(0,rS.length); vps.forEach(v=>v.s.visible=true);
+      blds.forEach(b=>colorB(b,b.gap?3:1)); fr.visible=frFill.visible=false; setPhase('Mission complete',97); }
+    // heading
+    const nx=t<T1?oS[Math.min(oS.length-1,Math.floor(t/T1*(oS.length-1))+3)]:rS[Math.min(rS.length-1,Math.floor(Math.max(0,(t-T1-T2)/T3)*(rS.length-1))+3)];
+    if(nx&&nx.distanceTo(uav.position)>.01)uav.rotation.y=Math.atan2(nx.x-uav.position.x,nx.z-uav.position.z)+Math.PI/4;
+  }
+  function reset(){blds.forEach(b=>b.state=0);t0=performance.now();}
+  function loop(now){ requestAnimationFrame(loop); if(!visible)return;
+    let t=Math.max(0,(now-t0)/1000); if(t>TOTAL){reset();t=0;}
+    if(reduce)t=T1+T2+T3+.1;
+    update(t); ctl&&ctl.update(); renderer.render(scene,cam);}
+  $('replay').onclick=reset;
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting},{threshold:0}).observe(host);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();outMat.color.copy(C['--accent']);retMat.color.copy(C['--warm']);shMat.color.copy(C['--accent']);vpMat.color.copy(C['--warm']);rotMat.color.copy(C['--accent']);ink.color.copy(C['--ink']);pad.material.color.copy(C['--ink']);ground.material.color.copy(C['--surface']);
+    scene.remove(grid);grid=new THREE.GridHelper(30,15,C['--line'],C['--line']);grid.scale.z=24/30;scene.add(grid);});
+  requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+(()=>{
   // reveal on scroll
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
