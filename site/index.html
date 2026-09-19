@@ -156,23 +156,20 @@ section{padding:84px 0;border-top:1px solid var(--line)}
 .more strong{font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:16px}
 .more span.d{color:var(--muted);font-size:13.5px;display:block}
 
-/* dark band */
-.band{background:var(--band);color:#aeb9c9;border-top:none}
-.band .sec-head h2{color:#fff}
-.band .sec-head .mono{color:#7fb0ff}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-.cols h4{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7fb0ff;margin:0 0 6px;font-weight:500}
-.tl{list-style:none;margin:0;padding:0}
-.tl li{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--band-line)}
-.tl time{font-size:12.5px;color:#7d8aa0;display:flex;gap:10px;align-items:baseline}
-.tl time::before{content:"";width:6px;height:6px;border-radius:50%;background:#4a5d7c;flex:none;transform:translateY(-1px)}
-.tl li.now time::before{background:#7fb0ff;box-shadow:0 0 0 4px rgba(127,176,255,.18)}
-.tl strong{font-family:"Space Grotesk";color:#fff;font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px}
-.tl .cur{font-size:10.5px;font-weight:600;color:#7fb0ff;background:rgba(127,176,255,.14);border-radius:4px;padding:1px 7px;font-family:Inter}
-.tl .role{font-size:14px;color:#d3dbe7}
-.tl .sub{font-size:13px;color:#7d8aa0;margin-top:4px}
-.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.skills span{font-family:"JetBrains Mono";font-size:11.5px;color:#d3dbe7;border:1px solid var(--band-line);border-radius:6px;padding:5px 10px}
+/* experience timeline */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.col-h{font-size:22px;font-weight:600;margin:0 0 22px}
+.tl{list-style:none;margin:0;padding:0 0 0 24px;border-left:2px solid var(--accent)}
+.tl li{position:relative;padding:0 0 30px}
+.tl li::before{content:"";position:absolute;left:-33px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl li.now::before{background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.tl h4{margin:0;font-family:"Space Grotesk";font-size:17px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tl .cur{font-size:10.5px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 7px;font-family:Inter}
+.tl time{display:inline-block;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:12.5px;padding:1px 11px;margin:7px 0 8px;border-radius:4px;font-variant-numeric:tabular-nums}
+.tl .org{font-style:italic;font-size:14px;color:var(--text)}
+.tl p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+.skills{display:flex;flex-wrap:wrap;gap:8px}
+.skills span{font-family:"JetBrains Mono";font-size:11.5px;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 10px}
 
 /* contact */
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
@@ -429,29 +426,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </div></section>
 
-<!-- ============ 04 EXPERIENCE (dark band) ============ -->
-<section id="experience" class="band"><div class="wrap">
+<!-- ============ 05 EXPERIENCE (timeline) ============ -->
+<section id="experience"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">05 / Experience &amp; Education</div><h2>Along the way.</h2></div>
+    <div><div class="mono">05 / Experience &amp; Education</div><h2>Along <span class="serif">the way.</span></h2></div>
   </div>
   <div class="cols">
     <div class="reveal">
-      <h4>Research</h4>
+      <h3 class="col-h">Research Experience</h3>
       <ul class="tl">
-        <li class="now"><time>20xx – Present</time><div><strong>AiRLab, Dongguk University <span class="cur">Current</span></strong><div class="role">Researcher · Advisor: Prof. Soohwan Song</div><div class="sub">Active view planning for UAV scanning (IROS 2026) · Online 3DGS mapping with stereo depth (Electronics 2025).</div></div></li>
-      </ul>
-      <h4 style="margin-top:34px">Education</h4>
-      <ul class="tl">
-        <li><time>20xx – 20xx</time><div><strong>Dongguk University</strong><div class="role">Degree / Major — edit me</div></div></li>
+        <li class="now"><h4>AiRLab, Dongguk University <span class="cur">Current</span></h4><time>20xx – Present</time><div class="org">Researcher · Advisor: Prof. Soohwan Song</div>
+          <p>Online explore-then-exploit UAV scanning with budgeted return re-scanning — first author, IROS 2026.</p>
+          <p>Online 3D Gaussian Splatting mapping with stereo depth estimation (Stereo-GS) — Electronics 2025.</p></li>
+        <li><h4>Honors &amp; Activities</h4><time>20xx</time><div class="org">Add an award or activity</div></li>
       </ul>
     </div>
     <div class="reveal">
-      <h4>Toolbox</h4>
-      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>3D Gaussian Splatting</span><span>SLAM</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
-      <h4 style="margin-top:34px">Honors &amp; Activities</h4>
+      <h3 class="col-h">Education</h3>
       <ul class="tl">
-        <li><time>20xx</time><div><strong>Add an award or activity</strong><div class="sub">Short description.</div></div></li>
+        <li><h4>Dongguk University</h4><time>20xx – Present</time><div class="org">Degree / Major — edit me</div><p>Advisor: Prof. Soohwan Song</p></li>
       </ul>
+      <h3 class="col-h" style="margin-top:8px">Skills</h3>
+      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>3D Gaussian Splatting</span><span>SLAM</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
     </div>
   </div>
 </div></section>
