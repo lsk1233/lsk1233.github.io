@@ -5,425 +5,413 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sanggi Lee — 3D Vision &amp; Robotics Researcher</title>
 <meta name="description" content="Sanggi Lee (이상기) — 3D vision and robotics: active view planning, online 3D reconstruction, visual perception. AiRLab, Dongguk University.">
+<meta name="theme-color" content="#000000">
 <link rel="icon" href="https://github.com/lsk1233.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f7f9; --surface:#ffffff; --tint:#eef2f8; --ink:#0c1a2e; --text:#2b3645; --muted:#6b7686; --line:#e1e5ec;
-  --accent:#1c64d1; --accent-soft:#e3edfb; --warm:#e0821c; --warm-soft:#fbeedd; --band:#0b1a30; --band-line:#1f3350;
+  color-scheme:dark;
+  --bg:#000; --bg2:#0b0b0d; --surface:#141417; --card:#1a1a1e; --tint:#1d2230;
+  --ink:#fafafa; --text:#c9ccd3; --muted:#8a8f99; --line:#26272c;
+  --accent:#3d8bff; --accent-2:#6aa8ff; --accent-soft:#12264a; --warm:#f2a04a; --warm-soft:#2e2112;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0a0f18; --surface:#111826; --tint:#131c2c; --ink:#eef2f8; --text:#c6cfdb; --muted:#8793a4; --line:#222d3f;
-  --accent:#5b9bff; --accent-soft:#16284a; --warm:#f2a04a; --warm-soft:#2e2112; --band:#060b13; --band-line:#1a2740;
-}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
 .mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
-h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;color:var(--ink);margin:0;letter-spacing:-.02em}
-.u{background-image:linear-gradient(currentColor,currentColor);background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:1px;transition:color .15s}
-.u:hover{color:var(--accent)}
+h1,h2,h3{font-family:Raleway,Inter,sans-serif;color:var(--ink);margin:0}
+.lnk{color:var(--accent-2);transition:color .15s}.lnk:hover{color:#fff}
+.u{background-image:linear-gradient(currentColor,currentColor);background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:1px}
 
-/* nav */
-nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:20px}
-.logo{display:flex;align-items:center;gap:12px;font-family:"Space Grotesk";font-weight:700;color:var(--ink);font-size:22px;letter-spacing:-.04em}
-.logo small{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted)}
-.logo b{color:var(--accent)}
-.menu{display:flex;align-items:center;gap:26px;font-size:13.5px}
-.menu a{color:var(--muted);position:relative;padding:4px 0}
-.menu a:hover,.menu a.on{color:var(--ink)}
+/* ---------- nav (transparent -> solid) ---------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(0,0,0,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:Raleway;font-weight:700;font-size:22px;color:#fff;letter-spacing:-.01em}
+.brand b{color:var(--accent)}
+.menu{display:flex;gap:28px;font-size:14px}
+.menu a{color:#d8dbe1;position:relative;padding:6px 0;transition:color .15s}
+.menu a:hover,.menu a.on{color:var(--accent)}
 .menu a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);border-radius:2px}
-.btn{display:inline-flex;align-items:center;gap:8px;border-radius:8px;padding:9px 16px;font-size:13.5px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:.15s}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
-.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn.solid:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
 
-/* hero */
-.hero{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center;padding:72px 0 80px}
-.eyebrow{color:var(--accent);display:flex;align-items:center;gap:10px}
-.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
-.hero h1{font-size:clamp(38px,4.6vw,54px);line-height:1.02;margin:18px 0 18px;font-weight:600}
-.hero h1 .serif{color:var(--accent);font-size:1.08em}
-.kw{color:var(--accent);font-size:13px;font-weight:500;margin-bottom:18px}
-.bio{max-width:500px;color:var(--text);margin:0 0 26px}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
-.chip{border-left:2px solid var(--accent);background:var(--surface);padding:8px 14px;border-radius:0 8px 8px 0}
-.chip .mono{color:var(--muted);font-size:10px;display:block}
-.chip strong{font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:14px}
-.feat{border-top:1px solid var(--line);margin-bottom:28px}
-.feat a{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);transition:.15s}
-.feat a:hover{padding-left:6px}
-.feat a:hover strong{color:var(--accent)}
-.feat .mono{color:var(--warm);font-size:10.5px}
-.feat strong{display:block;font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:15.5px;transition:.15s}
-.feat .arr{color:var(--muted)}
-.cta{display:flex;gap:10px;flex-wrap:wrap}
-.minilinks{display:flex;gap:18px;margin-top:22px;font-size:12.5px;color:var(--muted)}
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:radial-gradient(900px 520px at 78% 40%,rgba(61,139,255,.16),transparent 60%),radial-gradient(700px 400px at 10% 90%,rgba(61,139,255,.08),transparent 60%),var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 60% 45%,#000 30%,transparent 75%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center;padding-top:96px;padding-bottom:72px;width:100%}
+.hello{color:var(--accent);margin-bottom:14px}
+.hero h1{font-size:clamp(44px,6vw,72px);font-weight:800;line-height:1.02;letter-spacing:-.02em}
+.typed{font-family:Raleway;font-size:clamp(20px,2.4vw,28px);color:#e6e8ec;margin:16px 0 22px;font-weight:600;min-height:1.4em}
+.typed span{color:var(--accent);border-right:2px solid var(--accent);padding-right:3px;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{border-color:transparent}}
+.hero p.lead{max-width:470px;color:var(--text);margin:0 0 30px}
+.hero p.lead b{color:#fff;font-weight:600}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 22px;font-size:14px;font-weight:500;border:1px solid var(--line);color:#fff;transition:.2s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.solid{background:var(--accent);border-color:var(--accent)}
+.btn.solid:hover{background:#fff;border-color:#fff;color:#000}
+.social{display:flex;gap:20px;margin-top:28px;font-size:13px;color:var(--muted)}
+.social a:hover{color:var(--accent)}
+.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);color:var(--muted);font-size:10.5px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-cue i{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* mission card */
-.mission{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;box-shadow:0 20px 50px -30px rgba(12,26,46,.35)}
-.mission-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);margin-bottom:6px}
-.mission-top .live{color:var(--accent);display:flex;align-items:center;gap:6px}
+.mission{background:rgba(20,20,23,.82);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;box-shadow:0 30px 80px -30px rgba(61,139,255,.35);backdrop-filter:blur(6px)}
+.mission-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);margin-bottom:6px;gap:10px}
+.mission-top .live{color:var(--accent);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .mission-top .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
 @keyframes pulse{50%{opacity:.25}}
-.scene{width:100%;border-radius:10px;overflow:hidden;cursor:grab;position:relative}.scene:active{cursor:grabbing}.scene canvas{display:block}.drag-hint{position:absolute}
-.bld{fill:var(--tint);stroke:var(--line);stroke-width:1}
-.bld.gap{fill:var(--warm-soft);stroke:var(--warm);stroke-dasharray:3 3}
-.bld.fixed{fill:var(--accent-soft);stroke:var(--accent);stroke-dasharray:none}
-.grid-l{stroke:var(--line);stroke-width:.6}
-.p-out{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:5 5}
-.p-ret{fill:none;stroke:var(--warm);stroke-width:2.4;stroke-linecap:round}
-.vp{fill:var(--surface);stroke:var(--accent);stroke-width:1.5}
-.vp.r{stroke:var(--warm)}
-.home{fill:var(--ink)}
-.uav{fill:var(--ink)}
+.scene{width:100%;border-radius:10px;overflow:hidden;cursor:grab}.scene:active{cursor:grabbing}.scene canvas{display:block}
 .mission-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:8px;padding-top:12px;gap:12px;flex-wrap:wrap}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;white-space:nowrap;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:18px;height:0;border-top:2px dashed var(--accent);vertical-align:middle;margin-right:6px}
 .legend i.r{border-top:2.4px solid var(--warm)}
 .legend i.g{width:10px;height:10px;border:1.5px dashed var(--warm);background:var(--warm-soft)}
-.stat{font-size:12px;color:var(--muted)}
-.stat b{font-family:"JetBrains Mono";color:var(--ink);font-weight:500}
-.replay{font-size:12px;border:1px solid var(--line);background:none;color:var(--ink);border-radius:6px;padding:5px 10px;cursor:pointer;font-family:inherit}
+.stat{font-size:12px;color:var(--muted)}.stat b{font-family:"JetBrains Mono";color:#fff;font-weight:500}
+.replay{font-size:12px;border:1px solid var(--line);background:none;color:#fff;border-radius:6px;padding:5px 10px;cursor:pointer;font-family:inherit}
 .replay:hover{border-color:var(--accent);color:var(--accent)}
 
-/* sections */
-section{padding:84px 0;border-top:1px solid var(--line)}
-.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px}
-.sec-head .mono{color:var(--accent);margin-bottom:12px}
-.sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:500}
-.sec-head h2 .serif{color:var(--accent)}
-.sec-head p{max-width:300px;margin:0;color:var(--muted);font-size:13.5px;text-align:right}
+/* ---------- sections ---------- */
+section{padding:100px 0}
+section.alt{background:var(--bg2)}
+.head{margin-bottom:48px}
+.head .label{display:flex;align-items:center;gap:14px;font-family:"JetBrains Mono";font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.head .label::after{content:"";width:72px;height:1px;background:var(--accent)}
+.head h2{font-size:clamp(26px,3.2vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:.01em;margin-top:6px}
 
-.focus{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.fcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;transition:.2s}
-.fcard:hover{border-color:var(--accent);transform:translateY(-3px)}
-.fcard svg{width:30px;height:30px;color:var(--accent);margin-bottom:18px}
-.fcard h3{font-size:18px;font-weight:600;margin-bottom:8px}
-.fcard p{margin:0 0 14px;font-size:14px;color:var(--muted)}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:"JetBrains Mono";font-size:10.5px;border:1px solid var(--line);border-radius:4px;padding:2px 7px;color:var(--muted);background:var(--bg)}
+/* about */
+.about{display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:start}
+.photo{border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--card);aspect-ratio:4/5}
+.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15)}
+.about h3{font-size:24px;font-weight:700;margin-bottom:12px}
+.about h3 span{color:var(--accent)}
+.about p{margin:0 0 22px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;list-style:none;padding:0;margin:0 0 20px;font-size:14px}
+.info li{display:flex;gap:10px;align-items:baseline}
+.info li::before{content:"›";color:var(--accent);font-weight:700}
+.info strong{color:#fff;font-weight:600;white-space:nowrap}
+.info a{color:var(--accent-2)}.info a:hover{color:#fff}
 
-.pipe{margin-top:22px;background:var(--accent-soft);border-radius:12px;padding:24px 26px}
-.pipe-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+/* interests */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.icard{background:var(--card);border:1px solid transparent;border-radius:6px;padding:30px 26px 30px;text-align:center;transition:.25s}
+.icard:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 50px -25px rgba(61,139,255,.45)}
+.icard .img{height:150px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;border-radius:4px;overflow:hidden;background:#fff}
+.icard .img img{width:100%;height:100%;object-fit:cover}
+.icard .img.pair{background:#0e1420;gap:6px;padding:8px}
+.icard .img.pair img{width:50%;height:100%;border-radius:3px}
+.icard h3{font-size:21px;font-weight:700;margin-bottom:8px}
+.icard p{margin:0 0 14px;font-size:13.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.tag{font-family:"JetBrains Mono";font-size:10.5px;border:1px solid #33343a;border-radius:4px;padding:2px 8px;color:#b8bcc6}
+.pipe{margin-top:26px;border:1px solid var(--line);border-radius:6px;padding:22px 24px;background:var(--surface)}
+.pipe-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
 .pipe-top .mono{color:var(--accent)}
-.pipe-top span:last-child{font-family:"Space Grotesk";color:var(--ink);font-size:16px}
-.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
-.step{padding:14px 18px 0 0;border-top:2px solid color-mix(in srgb,var(--accent) 35%,transparent);position:relative}
-.step.ret{border-top-color:var(--warm)}
+.pipe-top span:last-child{font-family:Raleway;font-weight:600;color:#fff}
+.steps{display:grid;grid-template-columns:repeat(5,1fr)}
+.step{padding:12px 16px 0 0;border-top:2px solid #2a3a58}
+.step.hot{border-top-color:var(--accent)}
 .step .mono{color:var(--muted);font-size:10px}
-.step strong{display:block;font-family:"Space Grotesk";color:var(--ink);font-size:14.5px;font-weight:600;margin-top:2px}
+.step strong{display:block;font-family:Raleway;color:#fff;font-size:14.5px;font-weight:700;margin-top:2px}
+
+/* resume timeline */
+.resume{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.resume h3{font-size:24px;font-weight:700;margin-bottom:22px}
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--accent)}
+.tl li{position:relative;padding:0 0 28px}
+.tl li::before{content:"";position:absolute;left:-30px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--bg2);border:2px solid var(--accent)}
+.tl h4{margin:0;font-family:Raleway;text-transform:uppercase;font-size:15px;font-weight:700;color:#fff;letter-spacing:.02em}
+.tl time{display:inline-block;background:var(--card);color:#dfe2e8;font-size:12.5px;padding:2px 12px;margin:6px 0 8px;border-radius:3px}
+.tl .org{font-style:italic;color:var(--text);font-size:14px}
+.tl p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+.skills{display:flex;flex-wrap:wrap;gap:8px}
+.skills span{font-family:"JetBrains Mono";font-size:11.5px;color:#d3d7de;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:5px 10px}
 
 /* publications */
-.pubs-label{color:var(--accent);font-weight:600;font-size:13px;padding-bottom:12px;border-bottom:1px solid var(--line)}
-.pub{display:grid;grid-template-columns:240px 1fr;gap:32px;padding:30px 0;border-bottom:1px solid var(--line)}
-.pub .th{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;aspect-ratio:4/3;display:flex;align-items:center}
+.filter{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
+.filter button{font:500 13px Inter;color:#d8dbe1;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;cursor:pointer;transition:.15s}
+.filter button.on,.filter button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.pub{display:grid;grid-template-columns:250px 1fr;gap:32px;padding:28px;margin-bottom:18px;background:var(--surface);border:1px solid var(--line);border-radius:8px;transition:.2s}
+.pub:hover{border-color:#34507f}
+.pub .th{border-radius:6px;overflow:hidden;background:#fff;aspect-ratio:4/3;display:flex;align-items:center}
 .pub .th img{width:100%;height:100%;object-fit:contain}
-.venue{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.venue .mono{color:var(--accent);font-size:11px}
-.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
-.badge.w{background:var(--warm-soft);color:var(--warm)}
-.pub h3{font-size:21px;font-weight:600;line-height:1.3;margin-bottom:8px}
+.venue{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.venue .mono{color:var(--accent)}
+.badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent-2)}
+.pub h3{font-size:20px;font-weight:700;line-height:1.35;margin-bottom:8px}
 .pub h3 a:hover{color:var(--accent)}
-.authors{font-size:14px;color:var(--muted);margin-bottom:10px}
-.authors b{color:var(--ink);font-weight:600}
-.pub p{margin:0 0 14px;font-size:14px;color:var(--text);max-width:640px}
-.plinks{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--ink)}
+.authors{font-size:14px;color:var(--muted);margin-bottom:10px}.authors b{color:#fff}
+.pub p{margin:0 0 14px;font-size:14px}
+.plinks{display:flex;flex-wrap:wrap;gap:8px}
+.plinks a{font-size:12.5px;border:1px solid #33343a;border-radius:999px;padding:4px 13px;color:#e6e8ec;transition:.15s}
+.plinks a:hover{border-color:var(--accent);color:var(--accent)}
 
 /* projects */
-.proj{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.pcard .img{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.pcard .img img{width:100%;height:100%;object-fit:contain;transition:transform .4s}
-.pcard:hover .img img{transform:scale(1.03)}
-.pcard .img.pair{gap:10px;padding:18px;background:#0e1420}
-.pcard .img.pair figure{margin:0;flex:1;text-align:center;color:#9aa6b8}
-.pcard .img.pair img{border-radius:6px;aspect-ratio:1;object-fit:cover}
-.pcard .img.pair figcaption{font-family:"JetBrains Mono";font-size:10px;margin-top:6px;letter-spacing:.08em}
-.meta{color:var(--accent);font-size:11px;margin-bottom:6px}
-.pcard h3{font-size:22px;font-weight:500;margin-bottom:6px}
-.pcard .stack{font-size:12px;color:var(--accent);margin-bottom:8px}
-.pcard p{margin:0 0 12px;font-size:14px;color:var(--muted)}
-.more{margin-top:34px;border-top:1px solid var(--line)}
-.more a{display:grid;grid-template-columns:140px 1fr auto;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
-.more a:hover strong{color:var(--accent)}
-.more .mono{color:var(--muted);font-size:10.5px}
-.more strong{font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:16px}
-.more span.d{color:var(--muted);font-size:13.5px;display:block}
-
-/* dark band */
-.band{background:var(--band);color:#aeb9c9;border-top:none}
-.band .sec-head h2{color:#fff}
-.band .sec-head .mono{color:#7fb0ff}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-.cols h4{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7fb0ff;margin:0 0 6px;font-weight:500}
-.tl{list-style:none;margin:0;padding:0}
-.tl li{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--band-line)}
-.tl time{font-size:12.5px;color:#7d8aa0;display:flex;gap:10px;align-items:baseline}
-.tl time::before{content:"";width:6px;height:6px;border-radius:50%;background:#4a5d7c;flex:none;transform:translateY(-1px)}
-.tl li.now time::before{background:#7fb0ff;box-shadow:0 0 0 4px rgba(127,176,255,.18)}
-.tl strong{font-family:"Space Grotesk";color:#fff;font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px}
-.tl .cur{font-size:10.5px;font-weight:600;color:#7fb0ff;background:rgba(127,176,255,.14);border-radius:4px;padding:1px 7px;font-family:Inter}
-.tl .role{font-size:14px;color:#d3dbe7}
-.tl .sub{font-size:13px;color:#7d8aa0;margin-top:4px}
-.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.skills span{font-family:"JetBrains Mono";font-size:11.5px;color:#d3dbe7;border:1px solid var(--band-line);border-radius:6px;padding:5px 10px}
+.proj{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pcard{background:var(--card);border-radius:6px;overflow:hidden;border:1px solid transparent;transition:.25s;display:flex;flex-direction:column}
+.pcard:hover{border-color:var(--accent);transform:translateY(-6px)}
+.pcard .img{aspect-ratio:16/10;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pcard .img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pcard:hover .img img{transform:scale(1.05)}
+.pcard .img.pair{background:#0e1420;gap:8px;padding:12px}
+.pcard .img.pair img{width:50%;border-radius:4px;aspect-ratio:1}
+.pcard .img.art{background:radial-gradient(circle at 30% 30%,#1f3b6e,#0b1222 70%);color:var(--accent-2);font-family:"JetBrains Mono";font-size:12px;letter-spacing:.1em}
+.pcard .body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.pcard .meta{color:var(--accent);font-size:10.5px;margin-bottom:6px}
+.pcard h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.pcard p{margin:0 0 14px;font-size:13.5px;color:var(--muted);flex:1}
+.pcard .go{font-size:13px;color:#fff}.pcard:hover .go{color:var(--accent)}
 
 /* contact */
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.contact h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.08;letter-spacing:-.01em}
-.contact h2 em{color:var(--accent)}
-.contact p{color:var(--muted);font-size:14px}
-.mail{display:flex;justify-content:space-between;align-items:center;font-family:"Space Grotesk";font-size:clamp(20px,2.4vw,26px);color:var(--ink);padding:10px 0 18px;border-bottom:1px solid var(--line);transition:.15s}
-.mail:hover{color:var(--accent)}
-.clinks{display:flex;flex-wrap:wrap;gap:22px;margin-top:18px;font-size:13px;color:var(--ink)}
-footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:12px;color:var(--muted)}
-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.contact{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cbox{background:var(--card);border-radius:6px;padding:34px 26px;text-align:center;border:1px solid transparent;transition:.2s}
+.cbox:hover{border-color:var(--accent)}
+.cbox .ic{width:52px;height:52px;margin:0 auto 16px;border-radius:50%;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.cbox .ic svg{width:22px;height:22px}
+.cbox h3{font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.cbox p{margin:0;font-size:14px}
+.cbox .soc{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:13.5px}
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:13px;color:var(--muted)}
+footer strong{display:block;font-family:Raleway;font-size:20px;color:#fff;margin-bottom:4px}
+.totop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;opacity:0;pointer-events:none;transition:.3s;z-index:40;box-shadow:0 8px 24px -8px rgba(61,139,255,.8)}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{background:#fff;color:#000}
 
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.typed span{animation:none}}
 
-@media (max-width:900px){
-  .hero{grid-template-columns:1fr;gap:40px;padding:44px 0 56px}
-  .focus{grid-template-columns:1fr}
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:100px}
+  .about{grid-template-columns:1fr}.photo{max-width:260px}
+  .cards,.proj,.contact{grid-template-columns:1fr 1fr}
+  .resume{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr;row-gap:14px}
-  .proj,.cols,.contact{grid-template-columns:1fr}
-  .sec-head{flex-direction:column;align-items:flex-start}.sec-head p{text-align:left}
-  .menu a:not(.btn){display:none}
+  .scroll-cue{display:none}
 }
-@media (max-width:620px){
+@media (max-width:720px){
   .wrap{padding:0 16px}
-  .logo small{display:none}
-  section{padding:60px 0}
-  .pub{grid-template-columns:1fr;gap:16px}
-  .more a{grid-template-columns:1fr auto}.more a .mono{grid-column:1/-1}
-  .tl li{grid-template-columns:1fr;gap:4px}
+  section{padding:72px 0}
+  .burger{display:block}
+  .menu{position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:rgba(0,0,0,.96);border-bottom:1px solid var(--line);padding:6px 16px 14px;display:none}
+  .menu.open{display:flex}.menu a{padding:12px 0}.menu a.on::after{display:none}
+  .cards,.proj,.contact,.info{grid-template-columns:1fr}
+  .pub{grid-template-columns:1fr;gap:16px;padding:18px}
   .steps{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-
-<nav><div class="wrap">
-  <a class="logo" href="#top">sl<b>.</b> <small>Sanggi Lee</small></a>
-  <div class="menu">
-    <a href="#research" class="on">Research</a>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="#home">Sanggi Lee<b>.</b></a>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <div class="menu" id="menu">
+    <a href="#home" class="on">Home</a>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#resume">Resume</a>
     <a href="#publications">Publications</a>
     <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a class="btn solid" href="#contact">Get in touch ↗</a>
+    <a href="#contact">Contact</a>
   </div>
 </div></nav>
 
-<main id="top">
-<!-- ============ HERO ============ -->
-<div class="wrap hero">
-  <div>
-    <div class="eyebrow mono">Sanggi Lee / 이상기 · AiRLab</div>
-    <h1>3D Vision &amp; Robotics<br><span class="serif">Researcher</span></h1>
-    <div class="kw">Active View Planning · 3D Reconstruction · Gaussian Splatting SLAM · Visual Perception</div>
-    <p class="bio">I build systems that help robots <b>see, map, and decide where to look</b> — from online 3D Gaussian Splatting driven by stereo depth, to coverage-aware view planning that reconstructs a scene completely in a single pass.</p>
-
-    <div class="chips">
-      <div class="chip"><span class="mono">Affiliation</span><strong>Dongguk University</strong></div>
-      <div class="chip"><span class="mono">Advisor</span><strong>Prof. Soohwan Song</strong></div>
-      <div class="chip"><span class="mono">Lab</span><strong>AiRLab</strong></div>
+<!-- ================= HERO ================= -->
+<header class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <div class="hello mono">Hello, I'm</div>
+      <h1>Sanggi Lee</h1>
+      <div class="typed">I'm a <span id="typed">3D Vision Researcher</span></div>
+      <p class="lead">I build systems that help robots <b>see, map, and decide where to look</b> — from online 3D Gaussian Splatting driven by stereo depth, to coverage-aware view planning that reconstructs a scene completely in a single pass.</p>
+      <div class="cta">
+        <a class="btn solid" href="#publications">View publications ↘</a>
+        <a class="btn" href="#">Download CV ↗</a>
+      </div>
+      <div class="social">
+        <a href="mailto:bumpal2@naver.com">Email</a>
+        <a href="#">Google Scholar</a>
+        <a href="https://github.com/lsk1233">GitHub</a>
+        <a href="#">LinkedIn</a>
+      </div>
     </div>
 
-    <div class="feat">
-      <a href="https://lsk1233.github.io/explore-then-exploit/">
-        <span><span class="mono">IROS 2026 · First Author</span><strong>Online Explore-Then-Exploit UAV Scanning</strong></span><span class="arr">↗</span>
-      </a>
-      <a href="https://www.mdpi.com/2079-9292/14/22/4436">
-        <span><span class="mono">Electronics 2025 · Co-author</span><strong>Stereo-GS: Online 3D Gaussian Splatting Mapping</strong></span><span class="arr">↗</span>
-      </a>
-    </div>
-
-    <div class="cta">
-      <a class="btn solid" href="#research">Explore research ↘</a>
-      <a class="btn" href="#">CV (PDF) ↗</a>
-    </div>
-    <div class="minilinks">
-      <a class="u" href="mailto:bumpal2@naver.com">Email ↗</a>
-      <a class="u" href="#">Google Scholar ↗</a>
-      <a class="u" href="https://github.com/lsk1233">GitHub ↗</a>
-      <a class="u" href="#">LinkedIn ↗</a>
-    </div>
-  </div>
-
-  <!-- Mission visual: outbound scan -> detect gaps -> budgeted return re-scan -->
-  <div class="mission" aria-label="Animated illustration of an explore-then-exploit UAV mission">
-    <div class="mission-top mono"><span>Mission View · 3D · drag to rotate</span><span class="live" id="phase">Outbound scan</span></div>
-    <div id="scene" class="scene" aria-label="Interactive 3D illustration of an explore-then-exploit UAV mission. Drag to rotate."></div>
-    <div class="mission-foot">
-      <div class="legend"><span><i></i>Outbound</span><span><i class="r"></i>Return re-scan</span><span><i class="g"></i>Coverage gap</span></div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <span class="stat">Coverage <b id="cov">0%</b></span>
-        <button class="replay" id="replay">↺ Replay</button>
+    <div class="mission" aria-label="Animated illustration of an explore-then-exploit UAV mission">
+      <div class="mission-top mono"><span>Mission View · 3D · drag to rotate</span><span class="live" id="phase">Outbound scan</span></div>
+      <div id="scene" class="scene" aria-label="Interactive 3D illustration of an explore-then-exploit UAV mission. Drag to rotate."></div>
+      <div class="mission-foot">
+        <div class="legend"><span><i></i>Outbound</span><span><i class="r"></i>Return re-scan</span><span><i class="g"></i>Coverage gap</span></div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <span class="stat">Coverage <b id="cov">0%</b></span>
+          <button class="replay" id="replay">↺ Replay</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <a class="scroll-cue mono" href="#about">Scroll<i></i></a>
+</header>
 
-<!-- ============ 01 RESEARCH FOCUS ============ -->
-<section id="research"><div class="wrap">
-  <div class="sec-head reveal">
-    <div><div class="mono">01 / Research Focus</div><h2>Perceive. Reconstruct. <span class="serif">Decide where to look.</span></h2></div>
-    <p>Connecting what a robot sees, how it builds a 3D model, and where it should look next.</p>
-  </div>
-  <div class="focus">
-    <div class="fcard reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5" stroke-dasharray="2.5 2.5"/><path d="m3 17.5 9 5 9-5" opacity=".5"/></svg>
-      <h3>Online 3D reconstruction</h3>
-      <p>Building photorealistic, metrically accurate 3D maps in real time from streaming stereo images with 3D Gaussian Splatting.</p>
-      <div class="tags"><span class="tag">3DGS</span><span class="tag">SLAM</span><span class="tag">Stereo Depth</span><span class="tag">MVS</span></div>
-    </div>
-    <div class="fcard reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 0-8h-2a4 4 0 0 1 0-8h6" stroke-dasharray="2.5 2.5"/></svg>
-      <h3>Active view &amp; path planning</h3>
-      <p>Deciding which viewpoints matter under a limited budget — coverage evaluation and routing for complete reconstruction.</p>
-      <div class="tags"><span class="tag">Next-Best-View</span><span class="tag">ALNS</span><span class="tag">UAV</span></div>
-    </div>
-    <div class="fcard reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 13l2.5-2.5L13 13l3-3 2 2" /><circle cx="8" cy="9" r="1"/></svg>
-      <h3>Visual perception</h3>
-      <p>Deep learning for understanding images — segmentation of small objects and detecting AI-generated imagery.</p>
-      <div class="tags"><span class="tag">Segmentation</span><span class="tag">Detection</span><span class="tag">PyTorch</span></div>
+<main>
+<!-- ================= ABOUT ================= -->
+<section id="about"><div class="wrap">
+  <div class="head reveal"><div class="label">About</div><h2>Learn more about me</h2></div>
+  <div class="about reveal">
+    <div class="photo"><img src="https://github.com/lsk1233.png?size=560" alt="Sanggi Lee"></div>
+    <div>
+      <h3>3D Vision &amp; Robotics <span>Researcher</span></h3>
+      <p>I am a researcher at <b style="color:#fff">AiRLab, Dongguk University</b>, advised by Prof. Soohwan Song. My research spans online 3D reconstruction (3D Gaussian Splatting, SLAM, stereo depth), active view and path planning for complete scene capture, and learning-based visual perception. I'm always happy to talk about research — feel free to reach out.</p>
+      <ul class="info">
+        <li><strong>Institution:</strong> Dongguk University</li>
+        <li><strong>Lab:</strong> <a href="#">AiRLab</a></li>
+        <li><strong>Advisor:</strong> Prof. Soohwan Song</li>
+        <li><strong>Location:</strong> Seoul, Korea</li>
+        <li><strong>Email:</strong> <a href="mailto:bumpal2@naver.com">bumpal2@naver.com</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/lsk1233">lsk1233</a></li>
+        <li><strong>Google Scholar:</strong> <a href="#">Click here</a></li>
+        <li><strong>Curriculum Vitae:</strong> <a href="#">Click here</a></li>
+      </ul>
     </div>
   </div>
+</div></section>
 
+<!-- ================= RESEARCH INTEREST ================= -->
+<section id="research" class="alt"><div class="wrap">
+  <div class="head reveal"><div class="label">Research Interest</div><h2>I'm interested in</h2></div>
+  <div class="cards">
+    <div class="icard reveal">
+      <div class="img"><img src="assets/stereo-gs.jpg" alt="Stereo-GS reconstruction results" loading="lazy" style="object-fit:contain"></div>
+      <h3>3D Reconstruction</h3>
+      <p>Online 3D Gaussian Splatting, SLAM, stereo depth estimation, multi-view stereo</p>
+      <div class="tags"><span class="tag">3DGS</span><span class="tag">SLAM</span><span class="tag">Stereo</span></div>
+    </div>
+    <div class="icard reveal">
+      <div class="img"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit coverage and return paths" loading="lazy" style="object-fit:contain"></div>
+      <h3>Active View Planning</h3>
+      <p>Next-best-view selection, coverage evaluation, budget-constrained path planning</p>
+      <div class="tags"><span class="tag">NBV</span><span class="tag">ALNS</span><span class="tag">UAV</span></div>
+    </div>
+    <div class="icard reveal">
+      <div class="img pair"><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_image/c_image00005450.jpg" alt="Input frame" loading="lazy"><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_mask/c_mask00005450.png" alt="Segmentation mask" loading="lazy"></div>
+      <h3>Visual Perception</h3>
+      <p>Semantic segmentation of small objects, AI-generated image detection</p>
+      <div class="tags"><span class="tag">Segmentation</span><span class="tag">Detection</span></div>
+    </div>
+  </div>
   <div class="pipe reveal">
-    <div class="pipe-top"><span class="mono">The research pipeline</span><span>Pixels → 3D model → next view</span></div>
+    <div class="pipe-top"><span class="mono">Research pipeline</span><span>Pixels → 3D model → next view</span></div>
     <div class="steps">
       <div class="step"><span class="mono">01 / Sense</span><strong>Stereo / multi-view images</strong></div>
       <div class="step"><span class="mono">02 / Localize</span><strong>SLAM · camera pose</strong></div>
       <div class="step"><span class="mono">03 / Estimate</span><strong>Depth · stereo matching</strong></div>
-      <div class="step"><span class="mono">04 / Reconstruct</span><strong>Gaussian Splatting · MVS</strong></div>
-      <div class="step ret"><span class="mono">05 / Plan</span><strong>Coverage-aware next views</strong></div>
+      <div class="step hot"><span class="mono">04 / Reconstruct</span><strong>Gaussian Splatting · MVS</strong></div>
+      <div class="step hot"><span class="mono">05 / Plan</span><strong>Coverage-aware next views</strong></div>
     </div>
   </div>
 </div></section>
 
-<!-- ============ 02 PUBLICATIONS ============ -->
-<section id="publications"><div class="wrap">
-  <div class="sec-head reveal">
-    <div><div class="mono">02 / Publications</div><h2>From ideas to <span class="serif">published research.</span></h2></div>
-    <p><a class="u" href="#">Google Scholar ↗</a></p>
+<!-- ================= RESUME ================= -->
+<section id="resume"><div class="wrap">
+  <div class="head reveal"><div class="label">Resume</div><h2>Check my resume</h2></div>
+  <div class="resume">
+    <div class="reveal">
+      <h3>Education</h3>
+      <ul class="tl">
+        <li><h4>Dongguk University</h4><time>20xx – Present</time><div class="org">Degree / Major — edit me</div><p>Advisor: Prof. Soohwan Song</p></li>
+      </ul>
+      <h3 style="margin-top:14px">Skills</h3>
+      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>3D Gaussian Splatting</span><span>SLAM</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
+    </div>
+    <div class="reveal">
+      <h3>Research Experience</h3>
+      <ul class="tl">
+        <li><h4>AiRLab, Dongguk University</h4><time>20xx – Present</time><div class="org">Researcher</div>
+          <p>Online explore-then-exploit UAV scanning with budgeted return re-scanning — first author, IROS 2026.</p>
+          <p>Online 3D Gaussian Splatting mapping with stereo depth estimation (Stereo-GS) — Electronics 2025.</p></li>
+        <li><h4>Honors &amp; Activities</h4><time>20xx</time><div class="org">Add an award or activity</div></li>
+      </ul>
+    </div>
   </div>
-  <div class="pubs-label">Conference</div>
-  <article class="pub reveal">
-    <a class="th" href="https://lsk1233.github.io/explore-then-exploit/"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit teaser: initial coverage path and return re-scanning path" loading="lazy"></a>
+</div></section>
+
+<!-- ================= PUBLICATIONS ================= -->
+<section id="publications" class="alt"><div class="wrap">
+  <div class="head reveal"><div class="label">Publications</div><h2>My publications</h2></div>
+  <div class="filter reveal" id="filter">
+    <button class="on" data-f="all">All</button><button data-f="conf">Conference</button><button data-f="journal">Journal</button>
+  </div>
+  <article class="pub reveal" data-k="conf">
+    <a class="th" href="https://lsk1233.github.io/explore-then-exploit/"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit teaser" loading="lazy"></a>
     <div>
-      <div class="venue"><span class="mono">IROS 2026</span><span class="badge">Accepted</span></div>
+      <div class="venue"><span class="mono">IROS 2026 · Conference</span><span class="badge">Accepted</span></div>
       <h3><a href="https://lsk1233.github.io/explore-then-exploit/">Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning</a></h3>
       <div class="authors"><b>Sanggi Lee</b>, Inseong Choi, Soohwan Song<sup>†</sup></div>
       <p>Completes initial scanning and targeted re-scanning within a single flight. Captured images are processed during outbound flight to detect under-scanned regions, and the return path is optimized with sector-level budgeted routing and ALNS refinement — improving reconstruction completeness under identical travel budgets.</p>
-      <div class="plinks">
-        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/">Project page ↗</a>
-        <a class="u" href="#">Paper ↗</a>
-        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4">Video ↗</a>
-        <a class="u" href="#">Code ↗</a>
-      </div>
+      <div class="plinks"><a href="https://lsk1233.github.io/explore-then-exploit/">Project page</a><a href="#">Paper</a><a href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4">Video</a><a href="#">Code</a></div>
     </div>
   </article>
-  <div class="pubs-label" style="margin-top:34px">Journal</div>
-  <article class="pub reveal">
-    <a class="th" href="https://www.mdpi.com/2079-9292/14/22/4436"><img src="assets/stereo-gs.jpg" alt="Stereo-GS: stereo input, estimated depth, and rendered 3DGS results compared with baselines" loading="lazy"></a>
+  <article class="pub reveal" data-k="journal">
+    <a class="th" href="https://www.mdpi.com/2079-9292/14/22/4436"><img src="assets/stereo-gs.jpg" alt="Stereo-GS results" loading="lazy"></a>
     <div>
-      <div class="venue"><span class="mono">MDPI Electronics · 2025</span><span class="badge">Published</span></div>
+      <div class="venue"><span class="mono">MDPI Electronics 2025 · Journal</span><span class="badge">Published</span></div>
       <h3><a href="https://www.mdpi.com/2079-9292/14/22/4436">Stereo-GS: Online 3D Gaussian Splatting Mapping Using Stereo Depth Estimation</a></h3>
       <div class="authors">Junkyu Park*, Byeonggwon Lee*, <b>Sanggi Lee</b>, Soohwan Song<sup>†</sup> <span style="font-size:12px">(*equal contribution)</span></div>
       <p>A real-time online 3DGS system that reconstructs photorealistic scenes from streaming stereo pairs. Combines stereo DROID-SLAM tracking with FoundationStereo depth, a two-stage depth filtering pipeline, and PSNR-guided Gaussian initialization — state-of-the-art results on EuRoC and TartanAir.</p>
-      <div class="plinks">
-        <a class="u" href="https://www.mdpi.com/2079-9292/14/22/4436">Paper ↗</a>
-      </div>
+      <div class="plinks"><a href="https://www.mdpi.com/2079-9292/14/22/4436">Paper</a></div>
     </div>
   </article>
 </div></section>
 
-<!-- ============ 03 PROJECTS ============ -->
+<!-- ================= PROJECTS ================= -->
 <section id="projects"><div class="wrap">
-  <div class="sec-head reveal">
-    <div><div class="mono">03 / Selected Projects</div><h2>Research, <span class="serif">in practice.</span></h2></div>
-    <p><a class="u" href="https://github.com/lsk1233?tab=repositories">All repositories ↗</a></p>
-  </div>
+  <div class="head reveal"><div class="label">Portfolio</div><h2>Selected projects</h2></div>
   <div class="proj">
     <a class="pcard reveal" href="https://lsk1233.github.io/explore-then-exploit/">
-      <div class="img"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/paper_fig4.png" alt="Reconstruction results" loading="lazy"></div>
-      <div class="meta mono">Research · AiRLab · 2025 – 2026</div>
-      <h3>Complete 3D scans in one flight.</h3>
-      <div class="stack">Path Planning / ALNS / Photogrammetry</div>
-      <p>Maximizing 3D reconstruction completeness under a fixed flight budget, validated in urban-scale simulation.</p>
-      <span class="u" style="font-size:13px;color:var(--ink)">Explore the project ↗</span>
+      <div class="img"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/paper_fig4.png" alt="Reconstruction comparison" loading="lazy" style="object-fit:contain"></div>
+      <div class="body"><div class="meta mono">Research · Planning</div><h3>Complete 3D scans in one flight</h3><p>Maximizing reconstruction completeness under a fixed flight budget, validated in urban-scale simulation.</p><span class="go">Explore the project ↗</span></div>
+    </a>
+    <a class="pcard reveal" href="https://www.mdpi.com/2079-9292/14/22/4436">
+      <div class="img"><img src="assets/stereo-gs.jpg" alt="Stereo-GS" loading="lazy" style="object-fit:contain"></div>
+      <div class="body"><div class="meta mono">Research · Reconstruction</div><h3>Stereo-driven online 3DGS</h3><p>Real-time Gaussian Splatting maps from streaming stereo pairs with filtered, metrically accurate depth.</p><span class="go">Read the paper ↗</span></div>
     </a>
     <a class="pcard reveal" href="https://github.com/lsk1233/drone-segmentation">
-      <div class="img pair">
-        <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_image/c_image00005450.jpg" alt="Sky frame with small drone" loading="lazy"><figcaption>INPUT</figcaption></figure>
-        <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_mask/c_mask00005450.png" alt="Predicted drone mask" loading="lazy"><figcaption>MASK</figcaption></figure>
-      </div>
-      <div class="meta mono">Project · Visual Perception</div>
-      <h3>Segmenting small objects in video.</h3>
-      <div class="stack">PyTorch / Semantic Segmentation / Video</div>
-      <p>Pixel-level segmentation of small UAVs in sky footage, trained on cropped aerial frames and run on full drone videos.</p>
-      <span class="u" style="font-size:13px;color:var(--ink)">View on GitHub ↗</span>
+      <div class="img pair"><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_image/c_image00005450.jpg" alt="Input" loading="lazy"><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_mask/c_mask00005450.png" alt="Mask" loading="lazy"></div>
+      <div class="body"><div class="meta mono">Project · Perception</div><h3>Segmenting small objects in video</h3><p>Pixel-level segmentation of small UAVs in sky footage, trained on cropped frames and run on full videos.</p><span class="go">View on GitHub ↗</span></div>
+    </a>
+    <a class="pcard reveal" href="https://github.com/lsk1233/AI-image-detection">
+      <div class="img art">REAL ⟷ GENERATED</div>
+      <div class="body"><div class="meta mono">Project · Deep Learning</div><h3>AI-generated image detection</h3><p>Real vs. generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</p><span class="go">View on GitHub ↗</span></div>
+    </a>
+    <a class="pcard reveal" href="https://github.com/lsk1233">
+      <div class="img art">TRAJECTORY · C++</div>
+      <div class="body"><div class="meta mono">Project · Planning</div><h3>UAV trajectory generation</h3><p>Tooling for generating scanning trajectories for UAV missions.</p><span class="go">GitHub ↗</span></div>
+    </a>
+    <a class="pcard reveal" href="https://github.com/lsk1233">
+      <div class="img art">GEOMETRY · C++</div>
+      <div class="body"><div class="meta mono">Project · 3D</div><h3>3D modeling project</h3><p>Geometry processing for 3D reconstruction and scene representation.</p><span class="go">GitHub ↗</span></div>
     </a>
   </div>
-
-  <div class="more">
-    <a class="reveal" href="https://github.com/lsk1233/AI-image-detection"><span class="mono">Deep Learning</span><span><strong>AI-Generated Image Detection</strong><span class="d">Real vs. generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</span></span><span>↗</span></a>
-    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · Planning</span><span><strong>UAV Trajectory Generation</strong><span class="d">Tooling for generating scanning trajectories for UAV missions.</span></span><span>↗</span></a>
-    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · 3D</span><span><strong>3D Modeling Project</strong><span class="d">Geometry processing for 3D reconstruction and scene representation.</span></span><span>↗</span></a>
-  </div>
 </div></section>
 
-<!-- ============ 04 EXPERIENCE (dark band) ============ -->
-<section id="experience" class="band"><div class="wrap">
-  <div class="sec-head reveal">
-    <div><div class="mono">04 / Experience &amp; Education</div><h2>Along the way.</h2></div>
-  </div>
-  <div class="cols">
-    <div class="reveal">
-      <h4>Research</h4>
-      <ul class="tl">
-        <li class="now"><time>20xx – Present</time><div><strong>AiRLab, Dongguk University <span class="cur">Current</span></strong><div class="role">Researcher · Advisor: Prof. Soohwan Song</div><div class="sub">Active view planning for UAV scanning (IROS 2026) · Online 3DGS mapping with stereo depth (Electronics 2025).</div></div></li>
-      </ul>
-      <h4 style="margin-top:34px">Education</h4>
-      <ul class="tl">
-        <li><time>20xx – 20xx</time><div><strong>Dongguk University</strong><div class="role">Degree / Major — edit me</div></div></li>
-      </ul>
-    </div>
-    <div class="reveal">
-      <h4>Toolbox</h4>
-      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>3D Gaussian Splatting</span><span>SLAM</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
-      <h4 style="margin-top:34px">Honors &amp; Activities</h4>
-      <ul class="tl">
-        <li><time>20xx</time><div><strong>Add an award or activity</strong><div class="sub">Short description.</div></div></li>
-      </ul>
-    </div>
-  </div>
-</div></section>
-
-<!-- ============ CONTACT ============ -->
-<section id="contact"><div class="wrap contact">
-  <div class="reveal">
-    <div class="mono" style="color:var(--accent);margin-bottom:14px">Let's connect</div>
-    <h2>See the world.<br><em>Rebuild it in 3D.</em></h2>
-    <p>Open to research discussions and collaborations on 3D vision, reconstruction, and robotics.</p>
-  </div>
-  <div class="reveal" style="padding-top:34px">
-    <a class="mail" href="mailto:bumpal2@naver.com">bumpal2@naver.com <span>↗</span></a>
-    <div class="clinks"><a class="u" href="#">CV (PDF) ↗</a><a class="u" href="#">Google Scholar ↗</a><a class="u" href="https://github.com/lsk1233">GitHub ↗</a><a class="u" href="#">LinkedIn ↗</a></div>
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="alt"><div class="wrap">
+  <div class="head reveal"><div class="label">Contact</div><h2>Get in touch</h2></div>
+  <div class="contact">
+    <div class="cbox reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div><h3>Location</h3><p>AiRLab, Dongguk University<br>Seoul, Republic of Korea</p></div>
+    <div class="cbox reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><h3>Email me</h3><p><a class="lnk" href="mailto:bumpal2@naver.com">bumpal2@naver.com</a></p></div>
+    <div class="cbox reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6"/></svg></div><h3>Social profiles</h3><div class="soc"><a class="lnk" href="https://github.com/lsk1233">GitHub</a><a class="lnk" href="#">Scholar</a><a class="lnk" href="#">LinkedIn</a></div></div>
   </div>
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span>Perceive · Reconstruct · Plan</span><a class="u" href="#top">Back to top ↑</a></div></footer>
+<footer><strong>Sanggi Lee</strong>© 2026 Sanggi Lee · 3D Vision &amp; Robotics</footer>
+<a class="totop" id="totop" href="#home" aria-label="Back to top">↑</a>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -572,17 +560,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   requestAnimationFrame(loop);
 })();
 </script>
-
 <script>
 (()=>{
-  // reveal on scroll
+  const nav=document.getElementById('nav'), top=document.getElementById('totop');
+  const links=[...document.querySelectorAll('.menu a')], secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  const onScroll=()=>{const y=scrollY; nav.classList.toggle('solid',y>40); top.classList.toggle('show',y>600);
+    let cur=0; secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<140)cur=i}); links.forEach((a,i)=>a.classList.toggle('on',i===cur));};
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  const menu=document.getElementById('menu'); document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
+  links.forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  // typewriter
+  const words=['3D Vision Researcher','Robotics Researcher','3D Reconstruction Researcher','View Planning Researcher'], el=document.getElementById('typed');
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let w=0,i=words[0].length,del=true;
+    const tick=()=>{const s=words[w]; if(del){i--; if(i<=0){del=false;w=(w+1)%words.length;}} else {i++; if(i>=words[w].length){del=true; el.textContent=words[w]; return setTimeout(tick,1800);}}
+      el.textContent=words[w].slice(0,Math.max(i,0)); setTimeout(tick,del?45:85);};
+    setTimeout(tick,2200);}
+  // publication filter
+  const pubs=[...document.querySelectorAll('.pub')];
+  document.querySelectorAll('#filter button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#filter button').forEach(x=>x.classList.toggle('on',x===b));
+    pubs.forEach(p=>p.style.display=(b.dataset.f==='all'||p.dataset.k===b.dataset.f)?'':'none');});
+  // reveal
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-  // active nav
-  const links=[...document.querySelectorAll('.menu a[href^="#"]:not(.btn)')];
-  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
-  addEventListener('scroll',()=>{let cur=0;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<120)cur=i});
-    links.forEach((a,i)=>a.classList.toggle('on',i===cur))},{passive:true});
 })();
 </script>
 </body>
