@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sanggi Lee — Aerial Robotics Researcher</title>
-<meta name="description" content="Sanggi Lee (이상기) — UAV path planning and aerial 3D reconstruction. AiRLab, Dongguk University.">
+<title>Sanggi Lee — 3D Vision &amp; Robotics Researcher</title>
+<meta name="description" content="Sanggi Lee (이상기) — 3D vision and robotics: active view planning, online 3D reconstruction, visual perception. AiRLab, Dongguk University.">
 <link rel="icon" href="https://github.com/lsk1233.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .hero{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center;padding:72px 0 80px}
 .eyebrow{color:var(--accent);display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
-.hero h1{font-size:clamp(40px,5.6vw,64px);line-height:1.02;margin:18px 0 18px;font-weight:600}
+.hero h1{font-size:clamp(38px,4.6vw,54px);line-height:1.02;margin:18px 0 18px;font-weight:600}
 .hero h1 .serif{color:var(--accent);font-size:1.08em}
 .kw{color:var(--accent);font-size:13px;font-weight:500;margin-bottom:18px}
 .bio{max-width:500px;color:var(--text);margin:0 0 26px}
@@ -226,9 +226,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <div class="wrap hero">
   <div>
     <div class="eyebrow mono">Sanggi Lee / 이상기 · AiRLab</div>
-    <h1>Aerial Robotics<br><span class="serif">Researcher</span></h1>
-    <div class="kw">UAV Path Planning · Active View Planning · Aerial 3D Reconstruction</div>
-    <p class="bio">I teach drones where to look. My research makes UAV scanning <b>coverage-aware and online</b> — so a single flight can capture a scene completely, without a prior 3D model or a costly second mission.</p>
+    <h1>3D Vision &amp; Robotics<br><span class="serif">Researcher</span></h1>
+    <div class="kw">Active View Planning · 3D Reconstruction · Gaussian Splatting SLAM · Visual Perception</div>
+    <p class="bio">I build systems that help robots <b>see, map, and decide where to look</b> — from online 3D Gaussian Splatting driven by stereo depth, to coverage-aware view planning that reconstructs a scene completely in a single pass.</p>
 
     <div class="chips">
       <div class="chip"><span class="mono">Affiliation</span><strong>Dongguk University</strong></div>
@@ -240,8 +240,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a href="https://lsk1233.github.io/explore-then-exploit/">
         <span><span class="mono">IROS 2026 · First Author</span><strong>Online Explore-Then-Exploit UAV Scanning</strong></span><span class="arr">↗</span>
       </a>
-      <a href="https://github.com/lsk1233/drone-segmentation">
-        <span><span class="mono">Project · Aerial Perception</span><strong>Drone segmentation in sky footage</strong></span><span class="arr">↗</span>
+      <a href="https://www.mdpi.com/2079-9292/14/22/4436">
+        <span><span class="mono">Electronics 2025 · Co-author</span><strong>Stereo-GS: Online 3D Gaussian Splatting Mapping</strong></span><span class="arr">↗</span>
       </a>
     </div>
 
@@ -274,38 +274,38 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 01 RESEARCH FOCUS ============ -->
 <section id="research"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">01 / Research Focus</div><h2>Scan once. <span class="serif">Reconstruct completely.</span></h2></div>
-    <p>Closing the loop between where a drone flies and how well the scene gets reconstructed.</p>
+    <div><div class="mono">01 / Research Focus</div><h2>Perceive. Reconstruct. <span class="serif">Decide where to look.</span></h2></div>
+    <p>Connecting what a robot sees, how it builds a 3D model, and where it should look next.</p>
   </div>
   <div class="focus">
     <div class="fcard reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 0-8h-2a4 4 0 0 1 0-8h6" stroke-dasharray="2.5 2.5"/></svg>
-      <h3>View &amp; path planning</h3>
-      <p>Budget-constrained routing that decides which viewpoints matter most within a fixed flight time.</p>
-      <div class="tags"><span class="tag">ALNS</span><span class="tag">Orienteering</span><span class="tag">Trajectory</span></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5" stroke-dasharray="2.5 2.5"/><path d="m3 17.5 9 5 9-5" opacity=".5"/></svg>
+      <h3>Online 3D reconstruction</h3>
+      <p>Building photorealistic, metrically accurate 3D maps in real time from streaming stereo images with 3D Gaussian Splatting.</p>
+      <div class="tags"><span class="tag">3DGS</span><span class="tag">SLAM</span><span class="tag">Stereo Depth</span><span class="tag">MVS</span></div>
     </div>
     <div class="fcard reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5" stroke-dasharray="2.5 2.5"/></svg>
-      <h3>Online coverage evaluation</h3>
-      <p>Incrementally updating a 3D proxy model in flight to find under-scanned surfaces before landing.</p>
-      <div class="tags"><span class="tag">Photogrammetry</span><span class="tag">SfM / MVS</span><span class="tag">3D Proxy</span></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 0-8h-2a4 4 0 0 1 0-8h6" stroke-dasharray="2.5 2.5"/></svg>
+      <h3>Active view &amp; path planning</h3>
+      <p>Deciding which viewpoints matter under a limited budget — coverage evaluation and routing for complete reconstruction.</p>
+      <div class="tags"><span class="tag">Next-Best-View</span><span class="tag">ALNS</span><span class="tag">UAV</span></div>
     </div>
     <div class="fcard reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 13l2.5-2.5L13 13l3-3 2 2" /><circle cx="8" cy="9" r="1"/></svg>
-      <h3>Aerial perception</h3>
-      <p>Learning-based vision for aerial robots — segmenting small UAVs and analyzing imagery from the air.</p>
-      <div class="tags"><span class="tag">Segmentation</span><span class="tag">PyTorch</span><span class="tag">CNN</span></div>
+      <h3>Visual perception</h3>
+      <p>Deep learning for understanding images — segmentation of small objects and detecting AI-generated imagery.</p>
+      <div class="tags"><span class="tag">Segmentation</span><span class="tag">Detection</span><span class="tag">PyTorch</span></div>
     </div>
   </div>
 
   <div class="pipe reveal">
-    <div class="pipe-top"><span class="mono">The mission pipeline</span><span>One flight → complete scene</span></div>
+    <div class="pipe-top"><span class="mono">The research pipeline</span><span>Pixels → 3D model → next view</span></div>
     <div class="steps">
-      <div class="step"><span class="mono">01 / Explore</span><strong>Preplanned outbound scan</strong></div>
-      <div class="step"><span class="mono">02 / Update</span><strong>Incremental 3D proxy</strong></div>
-      <div class="step"><span class="mono">03 / Evaluate</span><strong>Surface coverage</strong></div>
-      <div class="step ret"><span class="mono">04 / Plan</span><strong>Budgeted return route</strong></div>
-      <div class="step ret"><span class="mono">05 / Exploit</span><strong>Targeted re-scan</strong></div>
+      <div class="step"><span class="mono">01 / Sense</span><strong>Stereo / multi-view images</strong></div>
+      <div class="step"><span class="mono">02 / Localize</span><strong>SLAM · camera pose</strong></div>
+      <div class="step"><span class="mono">03 / Estimate</span><strong>Depth · stereo matching</strong></div>
+      <div class="step"><span class="mono">04 / Reconstruct</span><strong>Gaussian Splatting · MVS</strong></div>
+      <div class="step ret"><span class="mono">05 / Plan</span><strong>Coverage-aware next views</strong></div>
     </div>
   </div>
 </div></section>
@@ -313,7 +313,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 02 PUBLICATIONS ============ -->
 <section id="publications"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">02 / Publications</div><h2>From flight logs to <span class="serif">published research.</span></h2></div>
+    <div><div class="mono">02 / Publications</div><h2>From ideas to <span class="serif">published research.</span></h2></div>
     <p><a class="u" href="#">Google Scholar ↗</a></p>
   </div>
   <div class="pubs-label">Conference</div>
@@ -332,19 +332,32 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </div>
     </div>
   </article>
+  <div class="pubs-label" style="margin-top:34px">Journal</div>
+  <article class="pub reveal">
+    <a class="th" href="https://www.mdpi.com/2079-9292/14/22/4436"><img src="assets/stereo-gs.jpg" alt="Stereo-GS: stereo input, estimated depth, and rendered 3DGS results compared with baselines" loading="lazy"></a>
+    <div>
+      <div class="venue"><span class="mono">MDPI Electronics · 2025</span><span class="badge">Published</span></div>
+      <h3><a href="https://www.mdpi.com/2079-9292/14/22/4436">Stereo-GS: Online 3D Gaussian Splatting Mapping Using Stereo Depth Estimation</a></h3>
+      <div class="authors">Junkyu Park*, Byeonggwon Lee*, <b>Sanggi Lee</b>, Soohwan Song<sup>†</sup> <span style="font-size:12px">(*equal contribution)</span></div>
+      <p>A real-time online 3DGS system that reconstructs photorealistic scenes from streaming stereo pairs. Combines stereo DROID-SLAM tracking with FoundationStereo depth, a two-stage depth filtering pipeline, and PSNR-guided Gaussian initialization — state-of-the-art results on EuRoC and TartanAir.</p>
+      <div class="plinks">
+        <a class="u" href="https://www.mdpi.com/2079-9292/14/22/4436">Paper ↗</a>
+      </div>
+    </div>
+  </article>
 </div></section>
 
 <!-- ============ 03 PROJECTS ============ -->
 <section id="projects"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">03 / Selected Projects</div><h2>Research, <span class="serif">up in the air.</span></h2></div>
+    <div><div class="mono">03 / Selected Projects</div><h2>Research, <span class="serif">in practice.</span></h2></div>
     <p><a class="u" href="https://github.com/lsk1233?tab=repositories">All repositories ↗</a></p>
   </div>
   <div class="proj">
     <a class="pcard reveal" href="https://lsk1233.github.io/explore-then-exploit/">
       <div class="img"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/paper_fig4.png" alt="Reconstruction results" loading="lazy"></div>
       <div class="meta mono">Research · AiRLab · 2025 – 2026</div>
-      <h3>Budget-constrained UAV scanning.</h3>
+      <h3>Complete 3D scans in one flight.</h3>
       <div class="stack">Path Planning / ALNS / Photogrammetry</div>
       <p>Maximizing 3D reconstruction completeness under a fixed flight budget, validated in urban-scale simulation.</p>
       <span class="u" style="font-size:13px;color:var(--ink)">Explore the project ↗</span>
@@ -354,8 +367,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_image/c_image00005450.jpg" alt="Sky frame with small drone" loading="lazy"><figcaption>INPUT</figcaption></figure>
         <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_mask/c_mask00005450.png" alt="Predicted drone mask" loading="lazy"><figcaption>MASK</figcaption></figure>
       </div>
-      <div class="meta mono">Project · Aerial Perception</div>
-      <h3>Finding the drone in the sky.</h3>
+      <div class="meta mono">Project · Visual Perception</div>
+      <h3>Segmenting small objects in video.</h3>
       <div class="stack">PyTorch / Semantic Segmentation / Video</div>
       <p>Pixel-level segmentation of small UAVs in sky footage, trained on cropped aerial frames and run on full drone videos.</p>
       <span class="u" style="font-size:13px;color:var(--ink)">View on GitHub ↗</span>
@@ -372,13 +385,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ============ 04 EXPERIENCE (dark band) ============ -->
 <section id="experience" class="band"><div class="wrap">
   <div class="sec-head reveal">
-    <div><div class="mono">04 / Experience &amp; Education</div><h2>Flight log.</h2></div>
+    <div><div class="mono">04 / Experience &amp; Education</div><h2>Along the way.</h2></div>
   </div>
   <div class="cols">
     <div class="reveal">
       <h4>Research</h4>
       <ul class="tl">
-        <li class="now"><time>20xx – Present</time><div><strong>AiRLab, Dongguk University <span class="cur">Current</span></strong><div class="role">Researcher · Advisor: Prof. Soohwan Song</div><div class="sub">Online explore-then-exploit UAV scanning (IROS 2026).</div></div></li>
+        <li class="now"><time>20xx – Present</time><div><strong>AiRLab, Dongguk University <span class="cur">Current</span></strong><div class="role">Researcher · Advisor: Prof. Soohwan Song</div><div class="sub">Active view planning for UAV scanning (IROS 2026) · Online 3DGS mapping with stereo depth (Electronics 2025).</div></div></li>
       </ul>
       <h4 style="margin-top:34px">Education</h4>
       <ul class="tl">
@@ -387,7 +400,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </div>
     <div class="reveal">
       <h4>Toolbox</h4>
-      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
+      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>3D Gaussian Splatting</span><span>SLAM</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
       <h4 style="margin-top:34px">Honors &amp; Activities</h4>
       <ul class="tl">
         <li><time>20xx</time><div><strong>Add an award or activity</strong><div class="sub">Short description.</div></div></li>
@@ -400,8 +413,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="contact"><div class="wrap contact">
   <div class="reveal">
     <div class="mono" style="color:var(--accent);margin-bottom:14px">Let's connect</div>
-    <h2>Plan the path.<br><em>Capture the whole scene.</em></h2>
-    <p>Open to research discussions and collaborations on aerial robotics and 3D reconstruction.</p>
+    <h2>See the world.<br><em>Rebuild it in 3D.</em></h2>
+    <p>Open to research discussions and collaborations on 3D vision, reconstruction, and robotics.</p>
   </div>
   <div class="reveal" style="padding-top:34px">
     <a class="mail" href="mailto:bumpal2@naver.com">bumpal2@naver.com <span>↗</span></a>
@@ -410,7 +423,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span>Scan once. Reconstruct completely.</span><a class="u" href="#top">Back to top ↑</a></div></footer>
+<footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span>Perceive · Reconstruct · Plan</span><a class="u" href="#top">Back to top ↑</a></div></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
