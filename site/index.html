@@ -3,171 +3,481 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sanggi Lee</title>
-<meta name="description" content="Sanggi Lee — UAV path planning, aerial 3D reconstruction, robotics. AIR Lab, Dongguk University.">
+<title>Sanggi Lee — Aerial Robotics Researcher</title>
+<meta name="description" content="Sanggi Lee (이상기) — UAV path planning and aerial 3D reconstruction. AiRLab, Dongguk University.">
 <link rel="icon" href="https://github.com/lsk1233.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff;--fg:#1a1a1a;--muted:#666;--line:#e8e8e8;--accent:#1f6feb;--hl:#fff8e1;--card:#fafafa}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--fg:#e6e6e6;--muted:#9aa0a6;--line:#262a31;--accent:#58a6ff;--hl:#2a2616;--card:#161a20}}
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --tint:#eef2f8; --ink:#0c1a2e; --text:#2b3645; --muted:#6b7686; --line:#e1e5ec;
+  --accent:#1c64d1; --accent-soft:#e3edfb; --warm:#e0821c; --warm-soft:#fbeedd; --band:#0b1a30; --band-line:#1f3350;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a0f18; --surface:#111826; --tint:#131c2c; --ink:#eef2f8; --text:#c6cfdb; --muted:#8793a4; --line:#222d3f;
+  --accent:#5b9bff; --accent-soft:#16284a; --warm:#f2a04a; --warm-soft:#2e2112; --band:#060b13; --band-line:#1a2740;
+}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:15.5px/1.65 Inter,"Noto Sans KR",system-ui,sans-serif}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px}
-nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
-nav .brand{font-weight:700;color:var(--fg)}
-nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;font-size:14px}
-nav ul a{color:var(--muted)}nav ul a:hover{color:var(--fg);text-decoration:none}
-header{display:flex;gap:36px;align-items:center;padding:56px 0 32px}
-header .txt{flex:1}
-h1{font-size:34px;margin:0 0 2px;letter-spacing:-.02em}
-.kr{color:var(--muted);font-weight:500;font-size:18px;margin-left:6px}
-.role{color:var(--muted);margin:0 0 14px}
-header img{width:180px;height:180px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
-.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.links a{border:1px solid var(--line);border-radius:999px;padding:4px 13px;font-size:13.5px;color:var(--fg)}
-.links a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
-section{padding:26px 0;border-top:1px solid var(--line)}
-h2{font-size:21px;margin:0 0 16px;letter-spacing:-.01em}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tags span{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:13.5px}
-.news{list-style:none;padding:0;margin:0}
-.news li{display:flex;gap:14px;padding:4px 0}
-.news time{color:var(--muted);min-width:78px;font-variant-numeric:tabular-nums}
-.pub{display:flex;gap:22px;padding:16px;margin:0 -16px;border-radius:10px}
-.pub.hl{background:var(--hl)}
-.pub .thumb{flex:0 0 200px}
-.pub .thumb img,.pub .thumb video{width:200px;height:130px;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:var(--card)}
-.pub .ph{width:200px;height:130px;border-radius:6px;border:1px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;padding:10px}
-.pub h3{font-size:16px;margin:0 0 4px;line-height:1.4}
-.pub .au{font-size:14px;margin:0}.pub .au b{font-weight:600}
-.pub .venue{font-size:14px;color:var(--muted);font-style:italic;margin:2px 0 6px}
-.pub .desc{font-size:14px;margin:6px 0 0;color:var(--muted)}
-.pub .bt a{font-size:13.5px;margin-right:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.card{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--card)}
-.card h3{margin:0 0 4px;font-size:15.5px}
-.card p{margin:0 0 8px;font-size:14px;color:var(--muted)}
-.card .stack{font-size:12.5px;color:var(--muted)}
-.tl{list-style:none;padding:0;margin:0}
-.tl li{display:flex;gap:16px;padding:6px 0}
-.tl time{color:var(--muted);min-width:130px;font-variant-numeric:tabular-nums}
-footer{color:var(--muted);font-size:13px;padding:30px 0 50px;border-top:1px solid var(--line);text-align:center}
-@media (max-width:680px){
- nav ul{display:none}
- header{flex-direction:column-reverse;text-align:center;gap:20px;padding-top:36px}
- header img{width:140px;height:140px}.links{justify-content:center}
- .pub{flex-direction:column;gap:12px}.pub .thumb img,.pub .thumb video,.pub .ph{width:100%;height:auto;aspect-ratio:16/9}
- .grid{grid-template-columns:1fr}.tl li,.news li{flex-direction:column;gap:0}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
+h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;color:var(--ink);margin:0;letter-spacing:-.02em}
+.u{background-image:linear-gradient(currentColor,currentColor);background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:1px;transition:color .15s}
+.u:hover{color:var(--accent)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;font-family:"Space Grotesk";font-weight:700;color:var(--ink);font-size:22px;letter-spacing:-.04em}
+.logo small{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.logo b{color:var(--accent)}
+.menu{display:flex;align-items:center;gap:26px;font-size:13.5px}
+.menu a{color:var(--muted);position:relative;padding:4px 0}
+.menu a:hover,.menu a.on{color:var(--ink)}
+.menu a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);border-radius:2px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:8px;padding:9px 16px;font-size:13.5px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:.15s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.solid:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center;padding:72px 0 80px}
+.eyebrow{color:var(--accent);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+.hero h1{font-size:clamp(40px,5.6vw,64px);line-height:1.02;margin:18px 0 18px;font-weight:600}
+.hero h1 .serif{color:var(--accent);font-size:1.08em}
+.kw{color:var(--accent);font-size:13px;font-weight:500;margin-bottom:18px}
+.bio{max-width:500px;color:var(--text);margin:0 0 26px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.chip{border-left:2px solid var(--accent);background:var(--surface);padding:8px 14px;border-radius:0 8px 8px 0}
+.chip .mono{color:var(--muted);font-size:10px;display:block}
+.chip strong{font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:14px}
+.feat{border-top:1px solid var(--line);margin-bottom:28px}
+.feat a{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);transition:.15s}
+.feat a:hover{padding-left:6px}
+.feat a:hover strong{color:var(--accent)}
+.feat .mono{color:var(--warm);font-size:10.5px}
+.feat strong{display:block;font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:15.5px;transition:.15s}
+.feat .arr{color:var(--muted)}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.minilinks{display:flex;gap:18px;margin-top:22px;font-size:12.5px;color:var(--muted)}
+
+/* mission card */
+.mission{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;box-shadow:0 20px 50px -30px rgba(12,26,46,.35)}
+.mission-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);margin-bottom:6px}
+.mission-top .live{color:var(--accent);display:flex;align-items:center;gap:6px}
+.mission-top .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.25}}
+#map{width:100%;height:auto;display:block}
+.bld{fill:var(--tint);stroke:var(--line);stroke-width:1}
+.bld.gap{fill:var(--warm-soft);stroke:var(--warm);stroke-dasharray:3 3}
+.bld.fixed{fill:var(--accent-soft);stroke:var(--accent);stroke-dasharray:none}
+.grid-l{stroke:var(--line);stroke-width:.6}
+.p-out{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:5 5}
+.p-ret{fill:none;stroke:var(--warm);stroke-width:2.4;stroke-linecap:round}
+.vp{fill:var(--surface);stroke:var(--accent);stroke-width:1.5}
+.vp.r{stroke:var(--warm)}
+.home{fill:var(--ink)}
+.uav{fill:var(--ink)}
+.mission-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:8px;padding-top:12px;gap:12px;flex-wrap:wrap}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;white-space:nowrap;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:0;border-top:2px dashed var(--accent);vertical-align:middle;margin-right:6px}
+.legend i.r{border-top:2.4px solid var(--warm)}
+.legend i.g{width:10px;height:10px;border:1.5px dashed var(--warm);background:var(--warm-soft)}
+.stat{font-size:12px;color:var(--muted)}
+.stat b{font-family:"JetBrains Mono";color:var(--ink);font-weight:500}
+.replay{font-size:12px;border:1px solid var(--line);background:none;color:var(--ink);border-radius:6px;padding:5px 10px;cursor:pointer;font-family:inherit}
+.replay:hover{border-color:var(--accent);color:var(--accent)}
+
+/* sections */
+section{padding:84px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px}
+.sec-head .mono{color:var(--accent);margin-bottom:12px}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:500}
+.sec-head h2 .serif{color:var(--accent)}
+.sec-head p{max-width:300px;margin:0;color:var(--muted);font-size:13.5px;text-align:right}
+
+.focus{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;transition:.2s}
+.fcard:hover{border-color:var(--accent);transform:translateY(-3px)}
+.fcard svg{width:30px;height:30px;color:var(--accent);margin-bottom:18px}
+.fcard h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.fcard p{margin:0 0 14px;font-size:14px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:"JetBrains Mono";font-size:10.5px;border:1px solid var(--line);border-radius:4px;padding:2px 7px;color:var(--muted);background:var(--bg)}
+
+.pipe{margin-top:22px;background:var(--accent-soft);border-radius:12px;padding:24px 26px}
+.pipe-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.pipe-top .mono{color:var(--accent)}
+.pipe-top span:last-child{font-family:"Space Grotesk";color:var(--ink);font-size:16px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.step{padding:14px 18px 0 0;border-top:2px solid color-mix(in srgb,var(--accent) 35%,transparent);position:relative}
+.step.ret{border-top-color:var(--warm)}
+.step .mono{color:var(--muted);font-size:10px}
+.step strong{display:block;font-family:"Space Grotesk";color:var(--ink);font-size:14.5px;font-weight:600;margin-top:2px}
+
+/* publications */
+.pubs-label{color:var(--accent);font-weight:600;font-size:13px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.pub{display:grid;grid-template-columns:240px 1fr;gap:32px;padding:30px 0;border-bottom:1px solid var(--line)}
+.pub .th{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;aspect-ratio:4/3;display:flex;align-items:center}
+.pub .th img{width:100%;height:100%;object-fit:contain}
+.venue{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.venue .mono{color:var(--accent);font-size:11px}
+.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+.badge.w{background:var(--warm-soft);color:var(--warm)}
+.pub h3{font-size:21px;font-weight:600;line-height:1.3;margin-bottom:8px}
+.pub h3 a:hover{color:var(--accent)}
+.authors{font-size:14px;color:var(--muted);margin-bottom:10px}
+.authors b{color:var(--ink);font-weight:600}
+.pub p{margin:0 0 14px;font-size:14px;color:var(--text);max-width:640px}
+.plinks{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--ink)}
+
+/* projects */
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.pcard .img{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.pcard .img img{width:100%;height:100%;object-fit:contain;transition:transform .4s}
+.pcard:hover .img img{transform:scale(1.03)}
+.pcard .img.pair{gap:10px;padding:18px;background:#0e1420}
+.pcard .img.pair figure{margin:0;flex:1;text-align:center;color:#9aa6b8}
+.pcard .img.pair img{border-radius:6px;aspect-ratio:1;object-fit:cover}
+.pcard .img.pair figcaption{font-family:"JetBrains Mono";font-size:10px;margin-top:6px;letter-spacing:.08em}
+.meta{color:var(--accent);font-size:11px;margin-bottom:6px}
+.pcard h3{font-size:22px;font-weight:500;margin-bottom:6px}
+.pcard .stack{font-size:12px;color:var(--accent);margin-bottom:8px}
+.pcard p{margin:0 0 12px;font-size:14px;color:var(--muted)}
+.more{margin-top:34px;border-top:1px solid var(--line)}
+.more a{display:grid;grid-template-columns:140px 1fr auto;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.more a:hover strong{color:var(--accent)}
+.more .mono{color:var(--muted);font-size:10.5px}
+.more strong{font-family:"Space Grotesk";color:var(--ink);font-weight:600;font-size:16px}
+.more span.d{color:var(--muted);font-size:13.5px;display:block}
+
+/* dark band */
+.band{background:var(--band);color:#aeb9c9;border-top:none}
+.band .sec-head h2{color:#fff}
+.band .sec-head .mono{color:#7fb0ff}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.cols h4{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7fb0ff;margin:0 0 6px;font-weight:500}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--band-line)}
+.tl time{font-size:12.5px;color:#7d8aa0;display:flex;gap:10px;align-items:baseline}
+.tl time::before{content:"";width:6px;height:6px;border-radius:50%;background:#4a5d7c;flex:none;transform:translateY(-1px)}
+.tl li.now time::before{background:#7fb0ff;box-shadow:0 0 0 4px rgba(127,176,255,.18)}
+.tl strong{font-family:"Space Grotesk";color:#fff;font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px}
+.tl .cur{font-size:10.5px;font-weight:600;color:#7fb0ff;background:rgba(127,176,255,.14);border-radius:4px;padding:1px 7px;font-family:Inter}
+.tl .role{font-size:14px;color:#d3dbe7}
+.tl .sub{font-size:13px;color:#7d8aa0;margin-top:4px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.skills span{font-family:"JetBrains Mono";font-size:11.5px;color:#d3dbe7;border:1px solid var(--band-line);border-radius:6px;padding:5px 10px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.08;letter-spacing:-.01em}
+.contact h2 em{color:var(--accent)}
+.contact p{color:var(--muted);font-size:14px}
+.mail{display:flex;justify-content:space-between;align-items:center;font-family:"Space Grotesk";font-size:clamp(20px,2.4vw,26px);color:var(--ink);padding:10px 0 18px;border-bottom:1px solid var(--line);transition:.15s}
+.mail:hover{color:var(--accent)}
+.clinks{display:flex;flex-wrap:wrap;gap:22px;margin-top:18px;font-size:13px;color:var(--ink)}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:12px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:40px;padding:44px 0 56px}
+  .focus{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:14px}
+  .proj,.cols,.contact{grid-template-columns:1fr}
+  .sec-head{flex-direction:column;align-items:flex-start}.sec-head p{text-align:left}
+  .menu a:not(.btn){display:none}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  .logo small{display:none}
+  section{padding:60px 0}
+  .pub{grid-template-columns:1fr;gap:16px}
+  .more a{grid-template-columns:1fr auto}.more a .mono{grid-column:1/-1}
+  .tl li{grid-template-columns:1fr;gap:4px}
+  .steps{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+
 <nav><div class="wrap">
- <a class="brand" href="#">Sanggi Lee</a>
- <ul><li><a href="#about">About</a></li><li><a href="#news">News</a></li><li><a href="#publications">Publications</a></li><li><a href="#projects">Projects</a></li><li><a href="#education">Education</a></li></ul>
+  <a class="logo" href="#top">sl<b>.</b> <small>Sanggi Lee</small></a>
+  <div class="menu">
+    <a href="#research" class="on">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a class="btn solid" href="#contact">Get in touch ↗</a>
+  </div>
 </div></nav>
 
-<main class="wrap">
-<!-- ===== HEADER / ABOUT ===== -->
-<header id="about">
- <div class="txt">
-  <h1>Sanggi Lee<span class="kr">이상기</span></h1>
-  <p class="role">Researcher · <a href="#">AIR Lab</a>, Dongguk University</p>
-  <p>I work on <b>autonomous UAV scanning and path planning</b> for large-scale <b>aerial 3D reconstruction</b>. My research focuses on online coverage evaluation and budget-constrained view planning, so that a drone can capture a complete scene in a single flight — without a prior 3D model or costly revisit missions.</p>
-  <p>I am also interested in vision-based perception for aerial robots, including semantic segmentation of drone imagery.</p>
-  <div class="links">
-   <a href="mailto:bumpal2@naver.com">Email</a>
-   <a href="#">CV</a>
-   <a href="#">Google Scholar</a>
-   <a href="https://github.com/lsk1233">GitHub</a>
-   <a href="#">LinkedIn</a>
-  </div>
- </div>
- <img src="https://github.com/lsk1233.png" alt="Sanggi Lee">
-</header>
-
-<!-- ===== RESEARCH INTERESTS ===== -->
-<section id="interests">
- <h2>Research Interests</h2>
- <div class="tags">
-  <span>UAV Path Planning</span><span>Active View Planning</span><span>Aerial Photogrammetry</span><span>3D Reconstruction</span><span>Coverage Optimization (ALNS)</span><span>Trajectory Generation</span><span>Aerial Perception</span>
- </div>
-</section>
-
-<!-- ===== NEWS ===== -->
-<section id="news">
- <h2>News</h2>
- <ul class="news">
-  <li><time>2026.09</time><span>Personal homepage launched.</span></li>
-  <li><time>2026.xx</time><span>Paper <i>“Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning”</i> submitted. <a href="https://lsk1233.github.io/explore-then-exploit/">[Project page]</a></span></li>
-  <li><time>20xx.xx</time><span>Joined <a href="#">AIR Lab</a> at Dongguk University.</span></li>
- </ul>
-</section>
-
-<!-- ===== PUBLICATIONS ===== -->
-<section id="publications">
- <h2>Publications</h2>
- <div class="pub hl">
-  <div class="thumb"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit teaser" loading="lazy"></div>
+<main id="top">
+<!-- ============ HERO ============ -->
+<div class="wrap hero">
   <div>
-   <h3><a href="https://lsk1233.github.io/explore-then-exploit/">Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning</a></h3>
-   <p class="au"><b>Sanggi Lee</b>, Inseong Choi, Soohwan Song<sup>†</sup></p>
-   <p class="venue">Under review, 2026</p>
-   <div class="bt"><a href="https://lsk1233.github.io/explore-then-exploit/">Project Page</a><a href="#">Paper</a><a href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4">Video</a><a href="#">Code</a></div>
-   <p class="desc">Completes initial scanning and targeted re-scanning within a single UAV flight: coverage gaps are detected online during outbound flight, and the return path is optimized with sector-level budgeted routing + ALNS refinement.</p>
-  </div>
- </div>
-</section>
+    <div class="eyebrow mono">Sanggi Lee / 이상기 · AiRLab</div>
+    <h1>Aerial Robotics<br><span class="serif">Researcher</span></h1>
+    <div class="kw">UAV Path Planning · Active View Planning · Aerial 3D Reconstruction</div>
+    <p class="bio">I teach drones where to look. My research makes UAV scanning <b>coverage-aware and online</b> — so a single flight can capture a scene completely, without a prior 3D model or a costly second mission.</p>
 
-<!-- ===== PROJECTS ===== -->
-<section id="projects">
- <h2>Projects</h2>
- <div class="grid">
-  <div class="card">
-   <h3>Drone Video Semantic Segmentation</h3>
-   <p>Segmentation model trained on aerial imagery and applied to drone video sequences.</p>
-   <div class="stack">PyTorch · Semantic Segmentation · <a href="https://github.com/lsk1233/drone-segmentation">GitHub</a></div>
-  </div>
-  <div class="card">
-   <h3>AI-Generated Image Detection</h3>
-   <p>Classifying real vs. AI-generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</p>
-   <div class="stack">PyTorch · CNN · FFT · <a href="https://github.com/lsk1233/AI-image-detection">GitHub</a></div>
-  </div>
-  <div class="card">
-   <h3>UAV Trajectory Generation</h3>
-   <p>Trajectory generation tool for UAV scanning missions.</p>
-   <div class="stack">C++ · Motion Planning</div>
-  </div>
-  <div class="card">
-   <h3>3D Modeling Project</h3>
-   <p>3D model processing pipeline for reconstruction and scene representation.</p>
-   <div class="stack">C++ · 3D Geometry</div>
-  </div>
- </div>
-</section>
+    <div class="chips">
+      <div class="chip"><span class="mono">Affiliation</span><strong>Dongguk University</strong></div>
+      <div class="chip"><span class="mono">Advisor</span><strong>Prof. Soohwan Song</strong></div>
+      <div class="chip"><span class="mono">Lab</span><strong>AiRLab</strong></div>
+    </div>
 
-<!-- ===== EDUCATION / EXPERIENCE ===== -->
-<section id="education">
- <h2>Education &amp; Experience</h2>
- <ul class="tl">
-  <li><time>20xx – Present</time><span><b>M.S. Student</b>, Dongguk University — AIR Lab (Advisor: Prof. Soohwan Song)</span></li>
-  <li><time>20xx – 20xx</time><span><b>B.S.</b>, Dongguk University</span></li>
- </ul>
-</section>
+    <div class="feat">
+      <a href="https://lsk1233.github.io/explore-then-exploit/">
+        <span><span class="mono">IROS 2026 · First Author</span><strong>Online Explore-Then-Exploit UAV Scanning</strong></span><span class="arr">↗</span>
+      </a>
+      <a href="https://github.com/lsk1233/drone-segmentation">
+        <span><span class="mono">Project · Aerial Perception</span><strong>Drone segmentation in sky footage</strong></span><span class="arr">↗</span>
+      </a>
+    </div>
 
-<!-- ===== SKILLS ===== -->
-<section id="skills">
- <h2>Skills</h2>
- <div class="tags">
-  <span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP / Photogrammetry</span><span>AirSim / Simulation</span>
- </div>
-</section>
+    <div class="cta">
+      <a class="btn solid" href="#research">Explore research ↘</a>
+      <a class="btn" href="#">CV (PDF) ↗</a>
+    </div>
+    <div class="minilinks">
+      <a class="u" href="mailto:bumpal2@naver.com">Email ↗</a>
+      <a class="u" href="#">Google Scholar ↗</a>
+      <a class="u" href="https://github.com/lsk1233">GitHub ↗</a>
+      <a class="u" href="#">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <!-- Mission visual: outbound scan -> detect gaps -> budgeted return re-scan -->
+  <div class="mission" aria-label="Animated illustration of an explore-then-exploit UAV mission">
+    <div class="mission-top mono"><span>Mission View · 01</span><span class="live" id="phase">Outbound scan</span></div>
+    <svg id="map" viewBox="0 0 440 340">
+      <g id="gridg"></g>
+      <g id="blds"></g>
+      <path id="pOut" class="p-out" d=""/>
+      <path id="pRet" class="p-ret" d=""/>
+      <g id="vps"></g>
+      <rect class="home" x="24" y="300" width="14" height="14" rx="3"/>
+      <text x="44" y="311" font-size="10" font-family="JetBrains Mono" fill="currentColor" style="color:var(--muted)">HOME</text>
+      <g id="uav"><circle r="9" fill="var(--accent)" opacity=".15"/><path class="uav" d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="var(--ink)" stroke-width="2"/><circle r="2.4" class="uav"/></g>
+    </svg>
+    <div class="mission-foot">
+      <div class="legend"><span><i></i>Outbound</span><span><i class="r"></i>Return re-scan</span><span><i class="g"></i>Coverage gap</span></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <span class="stat">Coverage <b id="cov">0%</b></span>
+        <button class="replay" id="replay">↺ Replay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 01 RESEARCH FOCUS ============ -->
+<section id="research"><div class="wrap">
+  <div class="sec-head reveal">
+    <div><div class="mono">01 / Research Focus</div><h2>Scan once. <span class="serif">Reconstruct completely.</span></h2></div>
+    <p>Closing the loop between where a drone flies and how well the scene gets reconstructed.</p>
+  </div>
+  <div class="focus">
+    <div class="fcard reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 0-8h-2a4 4 0 0 1 0-8h6" stroke-dasharray="2.5 2.5"/></svg>
+      <h3>View &amp; path planning</h3>
+      <p>Budget-constrained routing that decides which viewpoints matter most within a fixed flight time.</p>
+      <div class="tags"><span class="tag">ALNS</span><span class="tag">Orienteering</span><span class="tag">Trajectory</span></div>
+    </div>
+    <div class="fcard reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5" stroke-dasharray="2.5 2.5"/></svg>
+      <h3>Online coverage evaluation</h3>
+      <p>Incrementally updating a 3D proxy model in flight to find under-scanned surfaces before landing.</p>
+      <div class="tags"><span class="tag">Photogrammetry</span><span class="tag">SfM / MVS</span><span class="tag">3D Proxy</span></div>
+    </div>
+    <div class="fcard reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 13l2.5-2.5L13 13l3-3 2 2" /><circle cx="8" cy="9" r="1"/></svg>
+      <h3>Aerial perception</h3>
+      <p>Learning-based vision for aerial robots — segmenting small UAVs and analyzing imagery from the air.</p>
+      <div class="tags"><span class="tag">Segmentation</span><span class="tag">PyTorch</span><span class="tag">CNN</span></div>
+    </div>
+  </div>
+
+  <div class="pipe reveal">
+    <div class="pipe-top"><span class="mono">The mission pipeline</span><span>One flight → complete scene</span></div>
+    <div class="steps">
+      <div class="step"><span class="mono">01 / Explore</span><strong>Preplanned outbound scan</strong></div>
+      <div class="step"><span class="mono">02 / Update</span><strong>Incremental 3D proxy</strong></div>
+      <div class="step"><span class="mono">03 / Evaluate</span><strong>Surface coverage</strong></div>
+      <div class="step ret"><span class="mono">04 / Plan</span><strong>Budgeted return route</strong></div>
+      <div class="step ret"><span class="mono">05 / Exploit</span><strong>Targeted re-scan</strong></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ 02 PUBLICATIONS ============ -->
+<section id="publications"><div class="wrap">
+  <div class="sec-head reveal">
+    <div><div class="mono">02 / Publications</div><h2>From flight logs to <span class="serif">published research.</span></h2></div>
+    <p><a class="u" href="#">Google Scholar ↗</a></p>
+  </div>
+  <div class="pubs-label">Conference</div>
+  <article class="pub reveal">
+    <a class="th" href="https://lsk1233.github.io/explore-then-exploit/"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit teaser: initial coverage path and return re-scanning path" loading="lazy"></a>
+    <div>
+      <div class="venue"><span class="mono">IROS 2026</span><span class="badge">Accepted</span></div>
+      <h3><a href="https://lsk1233.github.io/explore-then-exploit/">Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning</a></h3>
+      <div class="authors"><b>Sanggi Lee</b>, Inseong Choi, Soohwan Song<sup>†</sup></div>
+      <p>Completes initial scanning and targeted re-scanning within a single flight. Captured images are processed during outbound flight to detect under-scanned regions, and the return path is optimized with sector-level budgeted routing and ALNS refinement — improving reconstruction completeness under identical travel budgets.</p>
+      <div class="plinks">
+        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/">Project page ↗</a>
+        <a class="u" href="#">Paper ↗</a>
+        <a class="u" href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4">Video ↗</a>
+        <a class="u" href="#">Code ↗</a>
+      </div>
+    </div>
+  </article>
+</div></section>
+
+<!-- ============ 03 PROJECTS ============ -->
+<section id="projects"><div class="wrap">
+  <div class="sec-head reveal">
+    <div><div class="mono">03 / Selected Projects</div><h2>Research, <span class="serif">up in the air.</span></h2></div>
+    <p><a class="u" href="https://github.com/lsk1233?tab=repositories">All repositories ↗</a></p>
+  </div>
+  <div class="proj">
+    <a class="pcard reveal" href="https://lsk1233.github.io/explore-then-exploit/">
+      <div class="img"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/paper_fig4.png" alt="Reconstruction results" loading="lazy"></div>
+      <div class="meta mono">Research · AiRLab · 2025 – 2026</div>
+      <h3>Budget-constrained UAV scanning.</h3>
+      <div class="stack">Path Planning / ALNS / Photogrammetry</div>
+      <p>Maximizing 3D reconstruction completeness under a fixed flight budget, validated in urban-scale simulation.</p>
+      <span class="u" style="font-size:13px;color:var(--ink)">Explore the project ↗</span>
+    </a>
+    <a class="pcard reveal" href="https://github.com/lsk1233/drone-segmentation">
+      <div class="img pair">
+        <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_image/c_image00005450.jpg" alt="Sky frame with small drone" loading="lazy"><figcaption>INPUT</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/lsk1233/drone-segmentation/main/test_mask/c_mask00005450.png" alt="Predicted drone mask" loading="lazy"><figcaption>MASK</figcaption></figure>
+      </div>
+      <div class="meta mono">Project · Aerial Perception</div>
+      <h3>Finding the drone in the sky.</h3>
+      <div class="stack">PyTorch / Semantic Segmentation / Video</div>
+      <p>Pixel-level segmentation of small UAVs in sky footage, trained on cropped aerial frames and run on full drone videos.</p>
+      <span class="u" style="font-size:13px;color:var(--ink)">View on GitHub ↗</span>
+    </a>
+  </div>
+
+  <div class="more">
+    <a class="reveal" href="https://github.com/lsk1233/AI-image-detection"><span class="mono">Deep Learning</span><span><strong>AI-Generated Image Detection</strong><span class="d">Real vs. generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</span></span><span>↗</span></a>
+    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · Planning</span><span><strong>UAV Trajectory Generation</strong><span class="d">Tooling for generating scanning trajectories for UAV missions.</span></span><span>↗</span></a>
+    <a class="reveal" href="https://github.com/lsk1233"><span class="mono">C++ · 3D</span><span><strong>3D Modeling Project</strong><span class="d">Geometry processing for 3D reconstruction and scene representation.</span></span><span>↗</span></a>
+  </div>
+</div></section>
+
+<!-- ============ 04 EXPERIENCE (dark band) ============ -->
+<section id="experience" class="band"><div class="wrap">
+  <div class="sec-head reveal">
+    <div><div class="mono">04 / Experience &amp; Education</div><h2>Flight log.</h2></div>
+  </div>
+  <div class="cols">
+    <div class="reveal">
+      <h4>Research</h4>
+      <ul class="tl">
+        <li class="now"><time>20xx – Present</time><div><strong>AiRLab, Dongguk University <span class="cur">Current</span></strong><div class="role">Researcher · Advisor: Prof. Soohwan Song</div><div class="sub">Online explore-then-exploit UAV scanning (IROS 2026).</div></div></li>
+      </ul>
+      <h4 style="margin-top:34px">Education</h4>
+      <ul class="tl">
+        <li><time>20xx – 20xx</time><div><strong>Dongguk University</strong><div class="role">Degree / Major — edit me</div></div></li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <h4>Toolbox</h4>
+      <div class="skills"><span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP</span><span>Photogrammetry</span><span>AirSim</span><span>Linux</span></div>
+      <h4 style="margin-top:34px">Honors &amp; Activities</h4>
+      <ul class="tl">
+        <li><time>20xx</time><div><strong>Add an award or activity</strong><div class="sub">Short description.</div></div></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact"><div class="wrap contact">
+  <div class="reveal">
+    <div class="mono" style="color:var(--accent);margin-bottom:14px">Let's connect</div>
+    <h2>Plan the path.<br><em>Capture the whole scene.</em></h2>
+    <p>Open to research discussions and collaborations on aerial robotics and 3D reconstruction.</p>
+  </div>
+  <div class="reveal" style="padding-top:34px">
+    <a class="mail" href="mailto:bumpal2@naver.com">bumpal2@naver.com <span>↗</span></a>
+    <div class="clinks"><a class="u" href="#">CV (PDF) ↗</a><a class="u" href="#">Google Scholar ↗</a><a class="u" href="https://github.com/lsk1233">GitHub ↗</a><a class="u" href="#">LinkedIn ↗</a></div>
+  </div>
+</div></section>
 </main>
 
-<footer>© 2026 Sanggi Lee · Layout inspired by <a href="https://jonbarron.info">Jon Barron</a>'s website</footer>
+<footer><div class="wrap"><span>© 2026 Sanggi Lee</span><span>Scan once. Reconstruct completely.</span><a class="u" href="#top">Back to top ↑</a></div></footer>
+
+<script>
+(()=>{
+  const NS="http://www.w3.org/2000/svg", $=id=>document.getElementById(id);
+  const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+  // grid
+  for(let x=20;x<=420;x+=40)mk('line',{x1:x,y1:10,x2:x,y2:330,class:'grid-l'},$('gridg'));
+  for(let y=10;y<=330;y+=40)mk('line',{x1:20,y1:y,x2:420,y2:y,class:'grid-l'},$('gridg'));
+  // city blocks [x,y,w,h,gap]
+  const B=[[70,40,50,40,0],[150,30,60,55,1],[240,45,45,40,0],[320,35,60,50,0],
+           [70,120,40,60,0],[140,125,70,45,0],[245,115,50,70,1],[330,125,45,45,0],
+           [80,215,55,45,1],[165,210,50,55,0],[250,220,60,40,0],[335,205,45,60,1]];
+  const bl=B.map(b=>mk('rect',{x:b[0],y:b[1],width:b[2],height:b[3],rx:3,class:'bld'},$('blds')));
+  // outbound lawnmower
+  const out=[[31,300],[40,20],[400,20],[400,100],[40,100],[40,195],[400,195],[400,290]];
+  // return: visit gap buildings on the way home
+  const ret=[[400,290],[358,235],[270,150],[180,57],[108,238],[31,300]];
+  const d=p=>'M'+p.map(q=>q.join(' ')).join(' L');
+  const pO=$('pOut'), pR=$('pRet'); pO.setAttribute('d',d(out)); pR.setAttribute('d',d(ret));
+  ret.slice(1,-1).forEach(p=>mk('circle',{cx:p[0],cy:p[1],r:4,class:'vp r'},$('vps')));
+  const LO=pO.getTotalLength(), LR=pR.getTotalLength(), uav=$('uav');
+  const gaps=B.map((b,i)=>b[4]?i:-1).filter(i=>i>=0);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let t0=null, raf;
+  function frame(ts){
+    if(!t0)t0=ts; const t=(ts-t0)/1000, T1=6, T2=1.2, T3=4.5;
+    let cov, phase;
+    pR.style.strokeDasharray=LR; 
+    if(t<T1){const k=t/T1, p=pO.getPointAtLength(LO*k);
+      uav.setAttribute('transform',`translate(${p.x} ${p.y})`); pR.style.strokeDashoffset=LR;
+      pO.style.opacity=1; cov=Math.round(k*78); phase='Outbound scan';
+      gaps.forEach(i=>bl[i].setAttribute('class','bld'));
+    } else if(t<T1+T2){ cov=78; phase='Detecting gaps';
+      gaps.forEach(i=>bl[i].setAttribute('class','bld gap'));
+    } else if(t<T1+T2+T3){const k=(t-T1-T2)/T3, p=pR.getPointAtLength(LR*k);
+      uav.setAttribute('transform',`translate(${p.x} ${p.y})`); pR.style.strokeDashoffset=LR*(1-k);
+      const done=Math.floor(k*gaps.length+0.35);
+      gaps.forEach((i,j)=>bl[i].setAttribute('class',j<done?'bld fixed':'bld gap'));
+      cov=Math.round(78+k*19); phase='Return re-scan';
+    } else { cov=97; phase='Mission complete'; gaps.forEach(i=>bl[i].setAttribute('class','bld fixed'));
+      $('cov').textContent=cov+'%'; $('phase').textContent=phase; return; }
+    $('cov').textContent=cov+'%'; $('phase').textContent=phase; raf=requestAnimationFrame(frame);
+  }
+  function start(){cancelAnimationFrame(raf);t0=null;
+    if(reduce){pR.style.strokeDasharray='none';gaps.forEach(i=>bl[i].setAttribute('class','bld fixed'));
+      const p=out[0];uav.setAttribute('transform',`translate(${p[0]} ${p[1]})`);$('cov').textContent='97%';$('phase').textContent='Mission complete';return;}
+    raf=requestAnimationFrame(frame);}
+  $('replay').onclick=start; start();
+
+  // reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // active nav
+  const links=[...document.querySelectorAll('.menu a[href^="#"]:not(.btn)')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  addEventListener('scroll',()=>{let cur=0;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<120)cur=i});
+    links.forEach((a,i)=>a.classList.toggle('on',i===cur))},{passive:true});
+})();
+</script>
 </body>
 </html>
