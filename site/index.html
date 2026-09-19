@@ -67,12 +67,12 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .minilinks{display:flex;gap:18px;margin-top:22px;font-size:12.5px;color:var(--muted)}
 
 /* mission card */
-.mission{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;box-shadow:0 20px 50px -30px rgba(12,26,46,.35)}
-.mission-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);margin-bottom:6px}
+.mission{position:relative;margin:-40px -30px -30px 0}
+.mission-top{position:absolute;top:18px;left:8%;right:4%;z-index:2;display:flex;justify-content:space-between;align-items:center;color:var(--muted);pointer-events:none}
 .mission-top .live{color:var(--accent);display:flex;align-items:center;gap:6px}
 .mission-top .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
 @keyframes pulse{50%{opacity:.25}}
-.scene{width:100%;border-radius:10px;overflow:hidden;cursor:grab;position:relative}.scene:active{cursor:grabbing}.scene canvas{display:block}.drag-hint{position:absolute}
+.scene{width:100%;cursor:grab;position:relative;-webkit-mask-image:radial-gradient(ellipse 70% 64% at 50% 52%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 70% 64% at 50% 52%,#000 60%,transparent 100%)}.scene:active{cursor:grabbing}.scene canvas{display:block}.drag-hint{position:absolute}
 .bld{fill:var(--tint);stroke:var(--line);stroke-width:1}
 .bld.gap{fill:var(--warm-soft);stroke:var(--warm);stroke-dasharray:3 3}
 .bld.fixed{fill:var(--accent-soft);stroke:var(--accent);stroke-dasharray:none}
@@ -83,7 +83,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .vp.r{stroke:var(--warm)}
 .home{fill:var(--ink)}
 .uav{fill:var(--ink)}
-.mission-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:8px;padding-top:12px;gap:12px;flex-wrap:wrap}
+.mission-foot{display:flex;justify-content:center;align-items:center;margin-top:-34px;position:relative;z-index:2;gap:10px 22px;flex-wrap:wrap}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;white-space:nowrap;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:18px;height:0;border-top:2px dashed var(--accent);vertical-align:middle;margin-right:6px}
 .legend i.r{border-top:2.4px solid var(--warm)}
@@ -217,6 +217,7 @@ html[lang="ko"] .mono{letter-spacing:.04em}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 
 @media (max-width:900px){
+  .mission{margin:-10px -8px 0}
   .hero{grid-template-columns:1fr;gap:40px;padding:44px 0 56px}
   .focus{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr;row-gap:14px}
@@ -436,14 +437,14 @@ html[lang="ko"] .mono{letter-spacing:.04em}
   const C={}; const readColors=()=>{['--ink','--muted','--line','--tint','--surface','--accent','--accent-soft','--warm','--warm-soft','--bg'].forEach(k=>C[k]=new THREE.Color(css(k)));};
   readColors();
 
-  const scene=new THREE.Scene();
+  const scene=new THREE.Scene(); scene.fog=new THREE.Fog(C['--bg'].clone(),48,82);
   const cam=new THREE.PerspectiveCamera(34,1,0.1,200);
   cam.position.set(28,22,31);
   scene.add(new THREE.HemisphereLight(0xffffff,0x8899aa,0.95));
   const sun=new THREE.DirectionalLight(0xffffff,0.55); sun.position.set(10,20,6); scene.add(sun);
 
   // ground + grid
-  const ground=new THREE.Mesh(new THREE.PlaneGeometry(30,24),new THREE.MeshBasicMaterial({color:C['--surface'],transparent:true,opacity:.6}));
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(30,24),new THREE.MeshBasicMaterial({color:C['--bg'],transparent:true,opacity:.9}));
   ground.rotation.x=-Math.PI/2; scene.add(ground);
   let grid=new THREE.GridHelper(30,15,C['--line'],C['--line']); grid.scale.z=24/30; scene.add(grid);
 
@@ -518,7 +519,7 @@ html[lang="ko"] .mono{letter-spacing:.04em}
     if(matchMedia('(pointer:coarse)').matches){ctl.enableRotate=false;renderer.domElement.style.touchAction='pan-y';}
     ctl.update();} else cam.lookAt(0,2.2,0);
 
-  function resize(){const w=host.clientWidth,h=Math.round(w*0.78);renderer.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  function resize(){const w=host.clientWidth,h=Math.round(w*0.86);renderer.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix();}
   addEventListener('resize',resize); resize();
 
   const T1=8, T2=1.6, T3=7, HOLD=3.5, TOTAL=T1+T2+T3+HOLD;
@@ -563,7 +564,7 @@ html[lang="ko"] .mono{letter-spacing:.04em}
     update(t); ctl&&ctl.update(); renderer.render(scene,cam);}
   $('replay').onclick=reset;
   new IntersectionObserver(es=>{visible=es[0].isIntersecting},{threshold:0}).observe(host);
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();outMat.color.copy(C['--accent']);retMat.color.copy(C['--warm']);shMat.color.copy(C['--accent']);vpMat.color.copy(C['--warm']);rotMat.color.copy(C['--accent']);ink.color.copy(C['--ink']);pad.material.color.copy(C['--ink']);ground.material.color.copy(C['--surface']);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();outMat.color.copy(C['--accent']);retMat.color.copy(C['--warm']);shMat.color.copy(C['--accent']);vpMat.color.copy(C['--warm']);rotMat.color.copy(C['--accent']);ink.color.copy(C['--ink']);pad.material.color.copy(C['--ink']);ground.material.color.copy(C['--bg']);scene.fog.color.copy(C['--bg']);
     scene.remove(grid);grid=new THREE.GridHelper(30,15,C['--line'],C['--line']);grid.scale.z=24/30;scene.add(grid);});
   requestAnimationFrame(loop);
 })();
