@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanggi Lee</title>
+<meta name="description" content="Sanggi Lee — UAV path planning, aerial 3D reconstruction, robotics. AIR Lab, Dongguk University.">
+<link rel="icon" href="https://github.com/lsk1233.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--muted:#666;--line:#e8e8e8;--accent:#1f6feb;--hl:#fff8e1;--card:#fafafa}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--fg:#e6e6e6;--muted:#9aa0a6;--line:#262a31;--accent:#58a6ff;--hl:#2a2616;--card:#161a20}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:15.5px/1.65 Inter,"Noto Sans KR",system-ui,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
+nav .brand{font-weight:700;color:var(--fg)}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;font-size:14px}
+nav ul a{color:var(--muted)}nav ul a:hover{color:var(--fg);text-decoration:none}
+header{display:flex;gap:36px;align-items:center;padding:56px 0 32px}
+header .txt{flex:1}
+h1{font-size:34px;margin:0 0 2px;letter-spacing:-.02em}
+.kr{color:var(--muted);font-weight:500;font-size:18px;margin-left:6px}
+.role{color:var(--muted);margin:0 0 14px}
+header img{width:180px;height:180px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.links a{border:1px solid var(--line);border-radius:999px;padding:4px 13px;font-size:13.5px;color:var(--fg)}
+.links a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+section{padding:26px 0;border-top:1px solid var(--line)}
+h2{font-size:21px;margin:0 0 16px;letter-spacing:-.01em}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:13.5px}
+.news{list-style:none;padding:0;margin:0}
+.news li{display:flex;gap:14px;padding:4px 0}
+.news time{color:var(--muted);min-width:78px;font-variant-numeric:tabular-nums}
+.pub{display:flex;gap:22px;padding:16px;margin:0 -16px;border-radius:10px}
+.pub.hl{background:var(--hl)}
+.pub .thumb{flex:0 0 200px}
+.pub .thumb img,.pub .thumb video{width:200px;height:130px;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:var(--card)}
+.pub .ph{width:200px;height:130px;border-radius:6px;border:1px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;padding:10px}
+.pub h3{font-size:16px;margin:0 0 4px;line-height:1.4}
+.pub .au{font-size:14px;margin:0}.pub .au b{font-weight:600}
+.pub .venue{font-size:14px;color:var(--muted);font-style:italic;margin:2px 0 6px}
+.pub .desc{font-size:14px;margin:6px 0 0;color:var(--muted)}
+.pub .bt a{font-size:13.5px;margin-right:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--card)}
+.card h3{margin:0 0 4px;font-size:15.5px}
+.card p{margin:0 0 8px;font-size:14px;color:var(--muted)}
+.card .stack{font-size:12.5px;color:var(--muted)}
+.tl{list-style:none;padding:0;margin:0}
+.tl li{display:flex;gap:16px;padding:6px 0}
+.tl time{color:var(--muted);min-width:130px;font-variant-numeric:tabular-nums}
+footer{color:var(--muted);font-size:13px;padding:30px 0 50px;border-top:1px solid var(--line);text-align:center}
+@media (max-width:680px){
+ nav ul{display:none}
+ header{flex-direction:column-reverse;text-align:center;gap:20px;padding-top:36px}
+ header img{width:140px;height:140px}.links{justify-content:center}
+ .pub{flex-direction:column;gap:12px}.pub .thumb img,.pub .thumb video,.pub .ph{width:100%;height:auto;aspect-ratio:16/9}
+ .grid{grid-template-columns:1fr}.tl li,.news li{flex-direction:column;gap:0}
+}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+ <a class="brand" href="#">Sanggi Lee</a>
+ <ul><li><a href="#about">About</a></li><li><a href="#news">News</a></li><li><a href="#publications">Publications</a></li><li><a href="#projects">Projects</a></li><li><a href="#education">Education</a></li></ul>
+</div></nav>
+
+<main class="wrap">
+<!-- ===== HEADER / ABOUT ===== -->
+<header id="about">
+ <div class="txt">
+  <h1>Sanggi Lee<span class="kr">이상기</span></h1>
+  <p class="role">Researcher · <a href="#">AIR Lab</a>, Dongguk University</p>
+  <p>I work on <b>autonomous UAV scanning and path planning</b> for large-scale <b>aerial 3D reconstruction</b>. My research focuses on online coverage evaluation and budget-constrained view planning, so that a drone can capture a complete scene in a single flight — without a prior 3D model or costly revisit missions.</p>
+  <p>I am also interested in vision-based perception for aerial robots, including semantic segmentation of drone imagery.</p>
+  <div class="links">
+   <a href="mailto:bumpal2@naver.com">Email</a>
+   <a href="#">CV</a>
+   <a href="#">Google Scholar</a>
+   <a href="https://github.com/lsk1233">GitHub</a>
+   <a href="#">LinkedIn</a>
+  </div>
+ </div>
+ <img src="https://github.com/lsk1233.png" alt="Sanggi Lee">
+</header>
+
+<!-- ===== RESEARCH INTERESTS ===== -->
+<section id="interests">
+ <h2>Research Interests</h2>
+ <div class="tags">
+  <span>UAV Path Planning</span><span>Active View Planning</span><span>Aerial Photogrammetry</span><span>3D Reconstruction</span><span>Coverage Optimization (ALNS)</span><span>Trajectory Generation</span><span>Aerial Perception</span>
+ </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section id="news">
+ <h2>News</h2>
+ <ul class="news">
+  <li><time>2026.09</time><span>Personal homepage launched.</span></li>
+  <li><time>2026.xx</time><span>Paper <i>“Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning”</i> submitted. <a href="https://lsk1233.github.io/explore-then-exploit/">[Project page]</a></span></li>
+  <li><time>20xx.xx</time><span>Joined <a href="#">AIR Lab</a> at Dongguk University.</span></li>
+ </ul>
+</section>
+
+<!-- ===== PUBLICATIONS ===== -->
+<section id="publications">
+ <h2>Publications</h2>
+ <div class="pub hl">
+  <div class="thumb"><img src="https://lsk1233.github.io/explore-then-exploit/static/images/teaser.png" alt="Explore-then-exploit teaser" loading="lazy"></div>
+  <div>
+   <h3><a href="https://lsk1233.github.io/explore-then-exploit/">Online Explore-Then-Exploit UAV Scanning with Budgeted Return Re-Scanning</a></h3>
+   <p class="au"><b>Sanggi Lee</b>, Inseong Choi, Soohwan Song<sup>†</sup></p>
+   <p class="venue">Under review, 2026</p>
+   <div class="bt"><a href="https://lsk1233.github.io/explore-then-exploit/">Project Page</a><a href="#">Paper</a><a href="https://lsk1233.github.io/explore-then-exploit/static/videos/demo.mp4">Video</a><a href="#">Code</a></div>
+   <p class="desc">Completes initial scanning and targeted re-scanning within a single UAV flight: coverage gaps are detected online during outbound flight, and the return path is optimized with sector-level budgeted routing + ALNS refinement.</p>
+  </div>
+ </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+ <h2>Projects</h2>
+ <div class="grid">
+  <div class="card">
+   <h3>Drone Video Semantic Segmentation</h3>
+   <p>Segmentation model trained on aerial imagery and applied to drone video sequences.</p>
+   <div class="stack">PyTorch · Semantic Segmentation · <a href="https://github.com/lsk1233/drone-segmentation">GitHub</a></div>
+  </div>
+  <div class="card">
+   <h3>AI-Generated Image Detection</h3>
+   <p>Classifying real vs. AI-generated images with ResNet / VGG, using frequency-spectrum transforms and degradation analysis.</p>
+   <div class="stack">PyTorch · CNN · FFT · <a href="https://github.com/lsk1233/AI-image-detection">GitHub</a></div>
+  </div>
+  <div class="card">
+   <h3>UAV Trajectory Generation</h3>
+   <p>Trajectory generation tool for UAV scanning missions.</p>
+   <div class="stack">C++ · Motion Planning</div>
+  </div>
+  <div class="card">
+   <h3>3D Modeling Project</h3>
+   <p>3D model processing pipeline for reconstruction and scene representation.</p>
+   <div class="stack">C++ · 3D Geometry</div>
+  </div>
+ </div>
+</section>
+
+<!-- ===== EDUCATION / EXPERIENCE ===== -->
+<section id="education">
+ <h2>Education &amp; Experience</h2>
+ <ul class="tl">
+  <li><time>20xx – Present</time><span><b>M.S. Student</b>, Dongguk University — AIR Lab (Advisor: Prof. Soohwan Song)</span></li>
+  <li><time>20xx – 20xx</time><span><b>B.S.</b>, Dongguk University</span></li>
+ </ul>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+ <h2>Skills</h2>
+ <div class="tags">
+  <span>C++</span><span>Python</span><span>PyTorch</span><span>ROS</span><span>OpenCV</span><span>COLMAP / Photogrammetry</span><span>AirSim / Simulation</span>
+ </div>
+</section>
+</main>
+
+<footer>© 2026 Sanggi Lee · Layout inspired by <a href="https://jonbarron.info">Jon Barron</a>'s website</footer>
+</body>
+</html>
