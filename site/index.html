@@ -241,6 +241,12 @@ html[lang="ko"] .mono{letter-spacing:.04em}
   .steps{grid-template-columns:1fr}
 }
 </style>
+<script>
+/* remove the old blog's service worker + cache (it served a stale page at the root URL) */
+if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>{if(!rs.length)return;
+  Promise.all(rs.map(r=>r.unregister())).then(()=>window.caches?caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))):0)
+  .then(()=>{try{if(!sessionStorage.getItem('swCleared')){sessionStorage.setItem('swCleared','1');location.reload();}}catch(e){}});}).catch(()=>{});}
+</script>
 </head>
 <body>
 
